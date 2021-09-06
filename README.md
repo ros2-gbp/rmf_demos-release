@@ -1,6 +1,6 @@
 # rmf_demos
 
-This package provides launch files and shell scripts demonstrating how to build and start systems using RMF.
+This package provides common launch files and shell scripts demonstrating how to build and start systems using RMF.
 
 ## Quality Declaration
 
