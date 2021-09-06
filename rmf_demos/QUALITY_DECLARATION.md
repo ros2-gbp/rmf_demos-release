@@ -114,9 +114,9 @@ This quality declaration has not been externally peer-reviewed and is not regist
 
 `rmf_demos` has the following runtime ROS dependencies.
 
-#### rmf_demo_maps
+#### rmf_demos_maps
 
-`rmf_demo_maps` is at [**Quality Level 4**](../rmf_demo_maps/QUALITY_DECLARATION.md).
+`rmf_demos_maps` is at [**Quality Level 4**](../rmf_demos_maps/QUALITY_DECLARATION.md).
 
 #### rmf_traffic_ros2
 
@@ -130,44 +130,21 @@ This quality declaration has not been externally peer-reviewed and is not regist
 
 `building_map_tools` is at [**Quality Level 4**](https://github.com/open-rmf/rmf_traffic_editor/blob/main/rmf_building_map_tools/QUALITY_DECLARATION.md).
 
-#### building_gazebo_plugins
-
-`building_gazebo_plugins` is at [**Quality Level 4**](https://github.com/open-rmf/rmf_simulation/blob/main/rmf_building_sim_gazebo_plugins/QUALITY_DECLARATION.md).
-
 #### rmf_visualization
 
 `rmf_visualization` is at [**Quality Level 4**](https://github.com/open-rmf/rmf_visualization/blob/main/rmf_visualization/QUALITY_DECLARATION.md).
 
-#### gazebo_ros_pkgs
+#### rmf_demos_assets
 
-`gazebo_ros_pkgs` does not declare a Quality Level.
-It is assumed to be at least **Quality Level 4** based on its widespread use.
+`rmf_demos_assets` is at [**Quality Level 4**](../rmf_demos_assets/QUALITY_DECLARATION.md).
 
-#### rmf_demo_assets
+#### rmf_demos_tasks
 
-`rmf_demo_assets` is at [**Quality Level 4**](../rmf_demo_assets/QUALITY_DECLARATION.md).
-
-#### rmf_gazebo_plugins
-
-`rmf_gazebo_plugins` is at [**Quality Level 4**](https://github.com/open-rmf/rmf_simulation/blob/main/rmf_robot_sim_gazebo_plugins/QUALITY_DECLARATION.md).
-
-#### rmf_demo_tasks
-
-`rmf_demo_tasks` is at [**Quality Level 4**](../rmf_demos_tasks/QUALITY_DECLARATION.md).
+`rmf_demos_tasks` is at [**Quality Level 4**](../rmf_demos_tasks/QUALITY_DECLARATION.md).
 
 #### rviz2
 
 `rviz2` does not declare a Quality Level.
-It is assumed tobe at **Quality Level 4** based on its widespread use.
-
-#### joy
-
-`joy` does not declare a Quality Level.
-It is assumed tobe at **Quality Level 4** based on its widespread use.
-
-#### teleop_twist_joy
-
-`teleop_twist_joy` does not declare a Quality Level.
 It is assumed tobe at **Quality Level 4** based on its widespread use.
 
 #### launch_xml
