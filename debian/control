@@ -1,0 +1,12 @@
+Source: ros-foxy-rmf-demos
+Section: misc
+Priority: optional
+Maintainer: Yadunund <yadunund@openrobotics.org>
+Build-Depends: debhelper (>= 9.0.0), ros-foxy-ament-cmake, ros-foxy-ros-workspace
+Homepage: 
+Standards-Version: 3.9.2
+
+Package: ros-foxy-rmf-demos
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ros-foxy-launch-xml, ros-foxy-rmf-building-map-tools, ros-foxy-rmf-demos-assets, ros-foxy-rmf-demos-maps, ros-foxy-rmf-demos-panel, ros-foxy-rmf-demos-tasks, ros-foxy-rmf-fleet-adapter, ros-foxy-rmf-task-ros2, ros-foxy-rmf-traffic-ros2, ros-foxy-rmf-visualization, ros-foxy-rviz2, ros-foxy-ros-workspace
+Description: Common launch files for RMF demos
