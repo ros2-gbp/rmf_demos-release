@@ -1,0 +1,12 @@
+Source: ros-foxy-rmf-demos-ign
+Section: misc
+Priority: optional
+Maintainer: Yadunund <yadunund@openrobotics.org>
+Build-Depends: debhelper (>= 9.0.0), ros-foxy-ament-cmake, ros-foxy-ros-workspace
+Homepage: 
+Standards-Version: 3.9.2
+
+Package: ros-foxy-rmf-demos-ign
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ros-foxy-launch-xml, ros-foxy-rmf-building-sim-ignition-plugins, ros-foxy-rmf-demos, ros-foxy-rmf-robot-sim-ignition-plugins, ros-foxy-ros-ign-bridge, ros-foxy-teleop-twist-keyboard, ros-foxy-ros-workspace
+Description: Launch files for RMF demos using the Ignition simulator
