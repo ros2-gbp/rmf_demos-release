@@ -1,0 +1,12 @@
+Source: ros-galactic-rmf-demos
+Section: misc
+Priority: optional
+Maintainer: Yadunund <yadunund@openrobotics.org>
+Build-Depends: debhelper (>= 9.0.0), ros-galactic-ament-cmake, ros-galactic-ros-workspace
+Homepage: 
+Standards-Version: 3.9.2
+
+Package: ros-galactic-rmf-demos
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ros-galactic-launch-xml, ros-galactic-rmf-building-map-tools, ros-galactic-rmf-demos-assets, ros-galactic-rmf-demos-maps, ros-galactic-rmf-demos-panel, ros-galactic-rmf-demos-tasks, ros-galactic-rmf-fleet-adapter, ros-galactic-rmf-task-ros2, ros-galactic-rmf-traffic-ros2, ros-galactic-rmf-visualization, ros-galactic-rviz2, ros-galactic-ros-workspace
+Description: Common launch files for RMF demos
