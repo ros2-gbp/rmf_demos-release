@@ -1,0 +1,12 @@
+Source: ros-rolling-rmf-demos-gz-classic
+Section: misc
+Priority: optional
+Maintainer: Yadunund <yadunund@openrobotics.org>
+Build-Depends: debhelper (>= 9.0.0), ros-rolling-ament-cmake, ros-rolling-ros-workspace
+Homepage: 
+Standards-Version: 3.9.2
+
+Package: ros-rolling-rmf-demos-gz-classic
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ros-rolling-gazebo-plugins, ros-rolling-joy, ros-rolling-launch-xml, ros-rolling-rmf-building-sim-gz-classic-plugins, ros-rolling-rmf-demos, ros-rolling-rmf-robot-sim-gz-classic-plugins, ros-rolling-teleop-twist-joy, ros-rolling-ros-workspace
+Description: Launch files for RMF demos using the Gazebo-classic simulator
