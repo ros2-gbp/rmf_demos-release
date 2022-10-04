@@ -1,27 +1,18 @@
 Panels:
   - Class: rviz_common/Displays
-    Help Height: 0
+    Help Height: 138
     Name: Displays
     Property Tree Widget:
       Expanded:
-        - /Status1
-        - /MarkerArray1
-        - /MarkerArray1/Status1
-        - /MarkerArray2
-        - /MarkerArray2/Topic1
-        - /MarkerArray3
         - /MarkerArray3/Topic1
-        - /MarkerArray4
         - /MarkerArray4/Topic1
-        - /Map1
-        - /Map1/Topic1
-        - /Map1/Update Topic1
       Splitter Ratio: 0.5
-    Tree Height: 1224
+    Tree Height: 303
   - Class: rviz_common/Selection
     Name: Selection
   - Class: rviz_common/Tool Properties
     Expanded:
+      - /2D Goal Pose1
       - /Publish Point1
     Name: Tool Properties
     Splitter Ratio: 0.5886790156364441
@@ -30,15 +21,13 @@ Panels:
       - /Current View1
     Name: Views
     Splitter Ratio: 0.5
-  - Class: rviz_common/Selection
-    Name: Selection
   - Class: rmf_visualization_rviz2_plugins/SchedulePanel
     Finish: 600
     Map: L1
     Name: SchedulePanel
     Topic: /rmf_visualization/parameters
-  - Class: rmf_visualization_rviz2_plugins/LiftPanel
-    Name: LiftPanel
+  - Class: rmf_visualization_rviz2_plugins/DoorPanel
+    Name: DoorPanel
 Visualization Manager:
   Class: ""
   Displays:
@@ -64,32 +53,26 @@ Visualization Manager:
       Enabled: true
       Name: MarkerArray
       Namespaces:
-        participant 13: true
-        participant 14: true
-        participant 15: true
-        participant 16: true
-        participant location 13: true
-        participant location 14: true
-        participant location 15: true
-        participant location 16: true
+        fleet_markers: true
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /fleet_markers
+      Value: true
+    - Class: rviz_default_plugins/MarkerArray
+      Enabled: true
+      Name: MarkerArray
+      Namespaces:
+        participant 0: true
+        participant location 0: true
       Topic:
         Depth: 5
         Durability Policy: Volatile
         History Policy: Keep Last
         Reliability Policy: Reliable
         Value: /schedule_markers
-      Value: true
-    - Class: rviz_default_plugins/MarkerArray
-      Enabled: true
-      Name: MarkerArray
-      Namespaces:
-        fleet_markers: true
-      Topic:
-        Depth: 10
-        Durability Policy: Volatile
-        History Policy: Keep Last
-        Reliability Policy: Reliable
-        Value: /fleet_markers
       Value: true
     - Class: rviz_default_plugins/MarkerArray
       Enabled: true
@@ -108,20 +91,7 @@ Visualization Manager:
       Enabled: true
       Name: MarkerArray
       Namespaces:
-        L1_door1: true
-        L1_door1_text: true
-        L1_door2: true
-        L1_door2_text: true
-        L1_door3: true
-        L1_door3_text: true
-        L1_door4: true
-        L1_door4_text: true
-        L1_door5: true
-        L1_door5_text: true
-        Lift1: true
-        Lift1_text: true
-        Lift2: true
-        Lift2_text: true
+        {}
       Topic:
         Depth: 5
         Durability Policy: Transient Local
@@ -132,7 +102,7 @@ Visualization Manager:
     - Alpha: 0.699999988079071
       Class: rviz_default_plugins/Map
       Color Scheme: map
-      Draw Behind: false
+      Draw Behind: true
       Enabled: true
       Name: Map
       Topic:
@@ -145,7 +115,7 @@ Visualization Manager:
       Update Topic:
         Depth: 5
         Durability Policy: Transient Local
-        History Policy: System Default
+        History Policy: Keep Last
         Reliability Policy: Reliable
         Value: /floorplan_updates
       Use Timestamp: false
@@ -157,6 +127,8 @@ Visualization Manager:
     Frame Rate: 30
   Name: root
   Tools:
+    - Class: rviz_default_plugins/Interact
+      Hide Inactive Objects: true
     - Class: rviz_default_plugins/MoveCamera
     - Class: rviz_default_plugins/Select
     - Class: rviz_default_plugins/FocusCamera
@@ -178,7 +150,7 @@ Visualization Manager:
         Durability Policy: Volatile
         History Policy: Keep Last
         Reliability Policy: Reliable
-        Value: /move_base_simple/goal
+        Value: /goal_pose
     - Class: rviz_default_plugins/PublishPoint
       Single click: true
       Topic:
@@ -193,7 +165,7 @@ Visualization Manager:
   Value: true
   Views:
     Current:
-      Angle: 9.685754776000977e-08
+      Angle: 0.39499884843826294
       Class: rviz_default_plugins/TopDownOrtho
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
@@ -203,21 +175,21 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Scale: 34.03446578979492
+      Scale: 2.1704256534576416
       Target Frame: <Fixed Frame>
       Value: TopDownOrtho (rviz_default_plugins)
-      X: 20.592708587646484
-      Y: -23.261062622070312
+      X: 22096.02734375
+      Y: 31454.720703125
     Saved: ~
 Window Geometry:
   Displays:
     collapsed: false
-  Height: 1548
+  DoorPanel:
+    collapsed: false
+  Height: 752
   Hide Left Dock: false
   Hide Right Dock: true
-  LiftPanel:
-    collapsed: false
-  QMainWindow State: 000000ff00000000fd00000004000000000000029300000570fc0200000009fb0000001200530065006c0065006300740069006f006e00000001e10000009b000000b000fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007302000001ed0000039500000185000000a3fb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afc0000006e000005700000057001000039fa000000010100000004fb000000100044006900730070006c0061007900730000000000ffffffff000001f700fffffffb0000001a005300630068006500640075006c006500500061006e0065006c0100000000ffffffff0000028300fffffffb00000012004c00690066007400500061006e0065006c0100000000ffffffff0000029300fffffffb000000120052004d0046002000500061006e0065006c0100000000000003340000000000000000fb0000002000730065006c0065006300740069006f006e00200062007500660066006500720200000138000000aa0000023a00000294fb00000014005700690064006500530074006500720065006f02000000e6000000d2000003ee0000030bfb0000000c004b0069006e0065006300740200000186000001060000030c00000261fb0000001200530065006c0065006300740069006f006e0000000337000000ad000000b000ffffff000000010000015f000003d7fc0200000002fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fb0000000a005600690065007700730000000027000003d70000013200ffffff0000000200000490000000a9fc0100000001fb0000000a00560069006500770073030000004e00000080000002e10000019700000003000007340000014cfc0100000002fb0000000800540069006d00650100000000000004420000000000000000fb0000000800540069006d00650100000000000004500000000000000000000007190000057000000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
+  QMainWindow State: 000000ff00000000fd00000004000000000000033400000296fc0200000009fb0000001200530065006c0065006300740069006f006e00000001e10000009b0000005c00fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007302000001ed000001df00000185000000a3fb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb000000100044006900730070006c006100790073000000006e00000191000000c900fffffffb0000002000730065006c0065006300740069006f006e00200062007500660066006500720200000138000000aa0000023a00000294fb00000014005700690064006500530074006500720065006f02000000e6000000d2000003ee0000030bfb0000000c004b0069006e0065006300740200000186000001060000030c00000261fc0000003d00000296000002080100001cfa000000000100000003fb0000001a005300630068006500640075006c006500500061006e0065006c0100000000ffffffff0000019600fffffffb000000120044006f006f007200500061006e0065006c0100000000ffffffff0000015900fffffffb000000120052004d0046002000500061006e0065006c0100000000000003340000000000000000000000010000015f00000765fc0200000003fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fb0000000a00560069006500770073000000006e00000765000000a400fffffffb0000001200530065006c0065006300740069006f006e010000025a000000b200000000000000000000000200000490000000a9fc0100000001fb0000000a00560069006500770073030000004e00000080000002e10000019700000003000004420000003efc0100000002fb0000000800540069006d00650100000000000004420000000000000000fb0000000800540069006d00650100000000000004500000000000000000000002300000029600000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
   SchedulePanel:
     collapsed: false
   Selection:
@@ -226,6 +198,6 @@ Window Geometry:
     collapsed: false
   Views:
     collapsed: true
-  Width: 2488
-  X: 1274
-  Y: 270
+  Width: 1386
+  X: 2239
+  Y: 158
