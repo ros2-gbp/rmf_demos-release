@@ -2,7 +2,7 @@
 
 <launch>
   <arg name="use_sim_time" default="false"/>
-  <arg name="failover_mode" default="false"/>
+  <arg name="enable_experimental_lift_watchdog" default="false" description="experimental lift watchdog"/>
 
   <!-- Common launch -->
   <include file="$(find-pkg-share rmf_demos)/common.launch.xml">
@@ -12,36 +12,51 @@
     <arg name="dashboard_config_file" value="$(find-pkg-share rmf_demos_dashboard_resources)/hotel/dashboard_config.json"/>
   </include>
 
-  <!-- TinyRobot fleet adapter, and robot state aggregator needed for the TinyRobot slotcar_plugin -->
-  <group>
-    <let name="fleet_name" value="tinyRobot"/>
-    <include file="$(find-pkg-share rmf_demos)/include/adapters/tinyRobot_adapter.launch.xml">
-      <arg name="fleet_name" value="$(var fleet_name)"/>
-      <arg name="use_sim_time" value="$(var use_sim_time)"/>
-      <arg name="nav_graph_file" value="$(find-pkg-share rmf_demos_maps)/maps/hotel/nav_graphs/0.yaml" />
-    </include>
-    <include file="$(find-pkg-share rmf_fleet_adapter)/robot_state_aggregator.launch.xml">
-      <arg name="robot_prefix" value="TinyRobot"/>
-      <arg name="fleet_name" value="$(var fleet_name)"/>
-      <arg name="use_sim_time" value="$(var use_sim_time)"/>
-      <arg name="failover_mode" value="$(var failover_mode)"/>
-    </include>
+  <!-- Experimental Lift watchdog service launch, default disable -->
+  <group if="$(var enable_experimental_lift_watchdog)" scoped="false">
+    <node pkg="rmf_fleet_adapter"
+          exec="experimental_lift_watchdog"
+          name="experimental_lift_watchdog"
+          output="both" />
+    <set_env name="EXPT_LIFT_WATCHDOG_SRV" value="experimental_lift_watchdog"/>
+  </group>
+  <group unless="$(var enable_experimental_lift_watchdog)" scoped="false">
+    <set_env name="EXPT_LIFT_WATCHDOG_SRV" value=""/>
   </group>
 
-  <!-- DeliveryRobot fleet adapter and robot state aggregator needed for DeliveryRobot slotcar_plugin -->
+  <!-- cleanerBotA fleet adapter -->
   <group>
-    <let name="fleet_name" value="deliveryRobot"/>
-    <include file="$(find-pkg-share rmf_demos)/include/adapters/deliveryRobot_adapter.launch.xml">
-      <arg name="fleet_name" value="$(var fleet_name)"/>
+    <include file="$(find-pkg-share rmf_demos_fleet_adapter)/launch/fleet_adapter.launch.xml">
       <arg name="use_sim_time" value="$(var use_sim_time)"/>
       <arg name="nav_graph_file" value="$(find-pkg-share rmf_demos_maps)/maps/hotel/nav_graphs/1.yaml" />
-    </include>
-    <include file="$(find-pkg-share rmf_fleet_adapter)/robot_state_aggregator.launch.xml">
-      <arg name="robot_prefix" value="DeliveryRobot"/>
-      <arg name="fleet_name" value="$(var fleet_name)"/>
-      <arg name="use_sim_time" value="$(var use_sim_time)"/>
-      <arg name="failover_mode" value="$(var failover_mode)"/>
+      <arg name="config_file" value="$(find-pkg-share rmf_demos)/config/hotel/cleanerBotA_config.yaml"/>
     </include>
   </group>
 
+  <!-- TinyRobot fleet adapter -->
+  <group>
+    <include file="$(find-pkg-share rmf_demos_fleet_adapter)/launch/fleet_adapter.launch.xml">
+      <arg name="use_sim_time" value="$(var use_sim_time)"/>
+      <arg name="nav_graph_file" value="$(find-pkg-share rmf_demos_maps)/maps/hotel/nav_graphs/0.yaml" />
+      <arg name="config_file" value="$(find-pkg-share rmf_demos)/config/hotel/tinyRobot_config.yaml"/>
+    </include>
+  </group>
+
+  <!-- DeliveryRobot fleet adapter -->
+  <group>
+    <include file="$(find-pkg-share rmf_demos_fleet_adapter)/launch/fleet_adapter.launch.xml">
+      <arg name="use_sim_time" value="$(var use_sim_time)"/>
+      <arg name="nav_graph_file" value="$(find-pkg-share rmf_demos_maps)/maps/hotel/nav_graphs/2.yaml" />
+      <arg name="config_file" value="$(find-pkg-share rmf_demos)/config/hotel/deliveryRobot_config.yaml"/>
+      <arg name="experimental_lift_watchdog_service" value="$(env EXPT_LIFT_WATCHDOG_SRV)"/>
+    </include>
+  </group>
+
+  <!-- Mock Docker Node, to provide CleanerBotA Fleet Adapter fix cleaning task paths -->
+  <group>
+    <let name="docking_config_file" value="$(find-pkg-share rmf_demos_tasks)/hotel_cleaner_config.yaml"/>
+    <node pkg="rmf_demos_tasks" exec="mock_docker" args="-c $(var docking_config_file)">
+      <param name="use_sim_time" value="$(var use_sim_time)"/>
+    </node>
+  </group>
 </launch>

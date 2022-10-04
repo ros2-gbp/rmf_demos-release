@@ -16,25 +16,35 @@
 
 import sys
 import uuid
-import time
 import argparse
+import json
+import asyncio
 
 import rclpy
 from rclpy.node import Node
 from rclpy.parameter import Parameter
-from rmf_task_msgs.srv import SubmitTask
-from rmf_task_msgs.msg import TaskType, Clean
+from rclpy.qos import qos_profile_system_default
+from rclpy.qos import QoSProfile
+from rclpy.qos import QoSHistoryPolicy as History
+from rclpy.qos import QoSDurabilityPolicy as Durability
+from rclpy.qos import QoSReliabilityPolicy as Reliability
+
+from rmf_task_msgs.msg import ApiRequest, ApiResponse
 
 
 ###############################################################################
 
-
-class TaskRequester:
+class TaskRequester(Node):
 
     def __init__(self, argv=sys.argv):
+        super().__init__('task_requester')
         parser = argparse.ArgumentParser()
         parser.add_argument('-cs', '--clean_start', required=True,
-                            type=str, help='Clean start waypoint')
+                            type=str, help='Cleaning zone')
+        parser.add_argument('-F', '--fleet', type=str,
+                            help='Fleet name, should define tgt with robot')
+        parser.add_argument('-R', '--robot', type=str,
+                            help='Robot name, should define tgt with fleet')
         parser.add_argument('-st', '--start_time',
                             help='Start time from now in secs, default: 0',
                             type=int, default=0)
@@ -45,57 +55,64 @@ class TaskRequester:
                             help='Use sim time, default: false')
 
         self.args = parser.parse_args(argv[1:])
-        self.node = rclpy.create_node('task_requester')
-        self.submit_task_srv = self.node.create_client(
-            SubmitTask, '/submit_task')
+        self.response = asyncio.Future()
+
+        transient_qos = QoSProfile(
+            history=History.KEEP_LAST,
+            depth=1,
+            reliability=Reliability.RELIABLE,
+            durability=Durability.TRANSIENT_LOCAL)
+
+        self.pub = self.create_publisher(
+          ApiRequest, 'task_api_requests', transient_qos)
 
         # enable ros sim time
         if self.args.use_sim_time:
-            self.node.get_logger().info("Using Sim Time")
+            self.get_logger().info("Using Sim Time")
             param = Parameter("use_sim_time", Parameter.Type.BOOL, True)
-            self.node.set_parameters([param])
+            self.set_parameters([param])
 
-    def generate_task_req_msg(self):
-        req_msg = SubmitTask.Request()
-        req_msg.description.task_type.type = TaskType.TYPE_CLEAN
+        # Construct task
+        msg = ApiRequest()
+        msg.request_id = "clean_" + str(uuid.uuid4())
+        payload = {}
+        if self.args.fleet and self.args.robot:
+            self.get_logger().info("Using 'robot_task_request'")
+            payload["type"] = "robot_task_request"
+            payload["robot"] = self.args.robot
+            payload["fleet"] = self.args.fleet
+        else:
+            self.get_logger().info("Using 'dispatch_task_request'")
+            payload["type"] = "dispatch_task_request"
+        request = {}
 
-        clean = Clean()
-        clean.start_waypoint = self.args.clean_start
-        req_msg.description.clean = clean
+        # Set task request start time
+        now = self.get_clock().now().to_msg()
+        now.sec = now.sec + self.args.start_time
+        start_time = now.sec * 1000 + round(now.nanosec/10**6)
+        request["unix_millis_earliest_start_time"] = start_time
 
-        ros_start_time = self.node.get_clock().now().to_msg()
-        ros_start_time.sec += self.args.start_time
-        req_msg.description.start_time = ros_start_time
+        # Define task request category
+        request["category"] = "clean"
 
-        req_msg.description.priority.value = self.args.priority
-        return req_msg
+        # Define task request description with cleaning zone
+        description = {}  # task_description_Clean.json
+        description["zone"] = self.args.clean_start
 
-    def main(self):
-        if not self.submit_task_srv.wait_for_service(timeout_sec=3.0):
-            self.node.get_logger().error('Dispatcher Node is not available')
-            return
+        request["description"] = description
+        payload["request"] = request
+        msg.json_msg = json.dumps(payload)
 
-        rclpy.spin_once(self.node, timeout_sec=1.0)
-        req_msg = self.generate_task_req_msg()
-        print(f"\nGenerated clean request: \n {req_msg}\n")
-        self.node.get_logger().info("Submitting Clean Request")
+        def receive_response(response_msg: ApiResponse):
+            if response_msg.request_id == msg.request_id:
+                self.response.set_result(json.loads(response_msg.json_msg))
 
-        try:
-            future = self.submit_task_srv.call_async(req_msg)
-            rclpy.spin_until_future_complete(
-                self.node, future, timeout_sec=1.0)
-            response = future.result()
-            if response is None:
-                self.node.get_logger().error('/submit_task srv call failed')
-            elif not response.success:
-                self.node.get_logger().error(
-                    'Dispatcher node failed to accept task')
-            else:
-                self.node.get_logger().info(
-                    'Request was successfully submitted '
-                    f'and assigned task_id: [{response.task_id}]')
-        except Exception as e:
-            self.node.get_logger().error('Error! Submit Srv failed %r' % (e,))
+        self.sub = self.create_subscription(
+            ApiResponse, 'task_api_responses', receive_response, 10
+        )
+
+        print(f"Json msg payload: \n{json.dumps(payload, indent=2)}")
+        self.pub.publish(msg)
 
 
 ###############################################################################
@@ -106,7 +123,12 @@ def main(argv=sys.argv):
     args_without_ros = rclpy.utilities.remove_ros_args(sys.argv)
 
     task_requester = TaskRequester(args_without_ros)
-    task_requester.main()
+    rclpy.spin_until_future_complete(
+        task_requester, task_requester.response, timeout_sec=5.0)
+    if task_requester.response.done():
+        print(f'Got response:\n{task_requester.response.result()}')
+    else:
+        print('Did not get a response')
     rclpy.shutdown()
 
 
