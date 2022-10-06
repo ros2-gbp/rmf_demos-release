@@ -7,7 +7,7 @@
   <arg name="ignition_version" default='6'/>
 
   <!-- Common launch -->
-  <include file="$(find-pkg-share rmf_demos)/airport_terminal.launch.xml">
+  <include file="$(find-pkg-share rmf_demos)/campus.launch.xml">
     <arg name="use_sim_time" value="$(var use_sim_time)"/>
     <arg name="failover_mode" value="$(var failover_mode)"/>
     <arg name="use_tpe" value="$(var use_tpe)"/>
@@ -15,7 +15,7 @@
 
   <!-- Simulation launch -->
   <include file="$(find-pkg-share rmf_demos_gz)/simulation.launch.xml">
-    <arg name="map_name" value="airport_terminal" />
+    <arg name="map_name" value="campus" />
     <arg name="ignition_version" value="$(var ignition_version)" />
   </include>
 
