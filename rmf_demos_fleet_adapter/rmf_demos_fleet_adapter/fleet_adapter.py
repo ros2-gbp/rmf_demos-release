@@ -14,6 +14,7 @@
 
 import argparse
 import asyncio
+import faulthandler
 import math
 import sys
 import threading
@@ -46,6 +47,7 @@ from .RobotClientAPI import RobotUpdateData
 # Main
 # ------------------------------------------------------------------------------
 def main(argv=sys.argv):
+    faulthandler.enable()
     # Init rclpy and adapter
     rclpy.init(args=argv)
     rmf_adapter.init_rclcpp()
@@ -274,6 +276,16 @@ class RobotAdapter:
                 self.attempt_cmd_until_success(
                     cmd=self.perform_clean, args=(description['zone'],)
                 )
+            case 'delivery_pickup':
+                self.attempt_cmd_until_success(
+                    cmd=self.api.toggle_attach, args=(
+                        self.name, True, self.cmd_id)
+                )
+            case 'delivery_dropoff':
+                self.attempt_cmd_until_success(
+                    cmd=self.api.toggle_attach, args=(
+                        self.name, False, self.cmd_id)
+                )
 
     def finish_action(self):
         # This is triggered by a ModeRequest callback which allows human
@@ -282,13 +294,14 @@ class RobotAdapter:
         if self.execution is not None:
             self.execution.finished()
             self.execution = None
-            self.attempt_cmd_until_success(
-                cmd=self.api.toggle_teleop, args=(self.name, False)
-            )
+            if self.teleoperation:
+                self.attempt_cmd_until_success(
+                    cmd=self.api.toggle_teleop, args=(self.name, False)
+                )
 
     def perform_docking(self, destination):
         match self.api.start_activity(
-            self.name, self.cmd_id, 'dock', destination.dock()
+            self.name, self.cmd_id, 'dock', destination.dock
         ):
             case (RobotAPIResult.SUCCESS, path):
                 self.override = self.execution.override_schedule(
