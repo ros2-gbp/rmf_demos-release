@@ -1,3 +1,33 @@
+## rmf_demos (rolling) - 2.5.0-1
+
+The packages in the `rmf_demos` repository were released into the `rolling` distro by running `/usr/bin/bloom-release --rosdistro rolling rmf_demos` on `Wed, 27 Nov 2024 08:52:00 -0000`
+
+These packages were released:
+- `rmf_demos`
+- `rmf_demos_assets`
+- `rmf_demos_bridges`
+- `rmf_demos_fleet_adapter`
+- `rmf_demos_gz`
+- `rmf_demos_maps`
+- `rmf_demos_tasks`
+
+Version of package(s) in repository `rmf_demos`:
+
+- upstream repository: https://github.com/open-rmf/rmf_demos.git
+- release repository: https://github.com/ros2-gbp/rmf_demos-release.git
+- rosdistro version: `2.4.0-1`
+- old version: `2.4.0-1`
+- new version: `2.5.0-1`
+
+Versions of tools used:
+
+- bloom version: `0.12.0`
+- catkin_pkg version: `1.0.0`
+- rosdep version: `0.25.1`
+- rosdistro version: `1.0.1`
+- vcstools version: `0.1.42`
+
+
 ## rmf_demos (rolling) - 2.4.0-1
 
 The packages in the `rmf_demos` repository were released into the `rolling` distro by running `/usr/bin/bloom-release --rosdistro rolling rmf_demos` on `Mon, 17 Jun 2024 19:57:04 -0000`
