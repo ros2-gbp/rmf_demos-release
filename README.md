@@ -1,3 +1,35 @@
+## rmf_demos (jazzy) - 2.3.0-1
+
+The packages in the `rmf_demos` repository were released into the `jazzy` distro by running `/usr/bin/bloom-release --new-track --rosdistro jazzy --track jazzy rmf_demos` on `Wed, 15 Jan 2025 22:03:59 -0000`
+
+These packages were released:
+- `rmf_demos_assets`
+- `rmf_demos_bridges`
+- `rmf_demos_fleet_adapter`
+- `rmf_demos_tasks`
+
+These packages were explicitly ignored:
+- `rmf_demos`
+- `rmf_demos_gz`
+- `rmf_demos_maps`
+
+Version of package(s) in repository `rmf_demos`:
+
+- upstream repository: https://github.com/open-rmf/rmf_demos.git
+- release repository: unknown
+- rosdistro version: `null`
+- old version: `null`
+- new version: `2.3.0-1`
+
+Versions of tools used:
+
+- bloom version: `0.12.0`
+- catkin_pkg version: `1.0.0`
+- rosdep version: `0.25.1`
+- rosdistro version: `1.0.1`
+- vcstools version: `0.1.42`
+
+
 ## rmf_demos (rolling) - 2.5.0-2
 
 The packages in the `rmf_demos` repository were released into the `rolling` distro by running `/usr/bin/bloom-release --rosdistro rolling rmf_demos` on `Thu, 28 Nov 2024 09:37:18 -0000`
