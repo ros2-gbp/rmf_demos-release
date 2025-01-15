@@ -13,7 +13,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""Go to place."""
 
 import argparse
 import asyncio
@@ -29,7 +28,6 @@ from rclpy.qos import QoSDurabilityPolicy as Durability
 from rclpy.qos import QoSHistoryPolicy as History
 from rclpy.qos import QoSProfile
 from rclpy.qos import QoSReliabilityPolicy as Reliability
-
 from rmf_task_msgs.msg import ApiRequest
 from rmf_task_msgs.msg import ApiResponse
 
@@ -37,10 +35,8 @@ from rmf_task_msgs.msg import ApiResponse
 
 
 class TaskRequester(Node):
-    """Task requester."""
 
     def __init__(self, argv=sys.argv):
-        """Initialize a task requester."""
         super().__init__('task_requester')
         parser = argparse.ArgumentParser()
         parser.add_argument('-F', '--fleet', type=str, help='Fleet name')
@@ -88,12 +84,6 @@ class TaskRequester(Node):
             '--use_sim_time',
             action='store_true',
             help='Use sim time, default: false',
-        )
-        parser.add_argument(
-            '--requester',
-            help='Entity that is requesting this task',
-            type=str,
-            default='rmf_demos_tasks'
         )
 
         self.args = parser.parse_args(argv[1:])
@@ -164,9 +154,7 @@ class TaskRequester(Node):
                 'category': 'go_to_place',
                 'phases': [{'activity': go_to_activity}],
             },
-            'unix_millis_request_time': start_time,
             'unix_millis_earliest_start_time': start_time,
-            'requester': self.args.requester,
         }
 
         if self.args.fleet:
@@ -193,7 +181,6 @@ class TaskRequester(Node):
 
 
 def main(argv=sys.argv):
-    """Go to place."""
     rclpy.init(args=sys.argv)
     args_without_ros = rclpy.utilities.remove_ros_args(sys.argv)
 
@@ -202,7 +189,7 @@ def main(argv=sys.argv):
         task_requester, task_requester.response, timeout_sec=5.0
     )
     if task_requester.response.done():
-        print(f'Got response: \n{task_requester.response.result()}')
+        print(f'Got response:\n{task_requester.response.result()}')
     else:
         print('Did not get a response')
     rclpy.shutdown()
