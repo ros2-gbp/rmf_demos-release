@@ -1,0 +1,12 @@
+Source: ros-jazzy-rmf-demos-tasks
+Section: misc
+Priority: optional
+Maintainer: Yadunund <yadunund@openrobotics.org>
+Build-Depends: debhelper (>= 9.0.0), ros-jazzy-ament-copyright <!nocheck>, ros-jazzy-ament-flake8 <!nocheck>, ros-jazzy-ament-pep257 <!nocheck>, ros-jazzy-ros-workspace, python3-all, python3-setuptools, dh-python
+Homepage: 
+Standards-Version: 3.9.2
+
+Package: ros-jazzy-rmf-demos-tasks
+Architecture: any
+Depends: ${python3:Depends}, ${misc:Depends}, ros-jazzy-rmf-dispenser-msgs, ros-jazzy-rmf-fleet-msgs, ros-jazzy-rmf-lift-msgs, ros-jazzy-rmf-task-msgs, ros-jazzy-ros-workspace
+Description: A package containing scripts for demos
