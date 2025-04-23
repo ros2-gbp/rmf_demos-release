@@ -1,0 +1,12 @@
+Source: ros-kilted-rmf-demos
+Section: misc
+Priority: optional
+Maintainer: Yadunund <yadunund@openrobotics.org>
+Build-Depends: debhelper (>= 9.0.0), ros-kilted-ament-cmake, ros-kilted-ros-workspace
+Homepage: 
+Standards-Version: 3.9.2
+
+Package: ros-kilted-rmf-demos
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ros-kilted-launch-xml, ros-kilted-rmf-building-map-tools, ros-kilted-rmf-demos-assets, ros-kilted-rmf-demos-fleet-adapter, ros-kilted-rmf-demos-maps, ros-kilted-rmf-demos-tasks, ros-kilted-rmf-fleet-adapter, ros-kilted-rmf-task-ros2, ros-kilted-rmf-traffic-ros2, ros-kilted-rmf-visualization, ros-kilted-rviz2, ros-kilted-ros-workspace
+Description: Common launch files for RMF demos
