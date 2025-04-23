@@ -1,0 +1,71 @@
+ros-kilted-rmf-demos-bridges (2.5.0-3noble) noble; urgency=high
+
+
+
+ -- Yadunund <yadunund@openrobotics.org>  Wed, 27 Nov 2024 06:00:00 -0000
+
+ros-kilted-rmf-demos-bridges (2.4.0-3noble) noble; urgency=high
+
+
+
+ -- Yadunund <yadunund@openrobotics.org>  Wed, 12 Jun 2024 05:00:00 -0000
+
+ros-kilted-rmf-demos-bridges (2.3.0-3noble) noble; urgency=high
+
+  * Add all exec deps for rmf_demos_fleet_adapter (#211 <https://github.com/open-rmf/rmf_demos/pull/211>)
+  * Update CI to rolling on main (#208 <https://github.com/open-rmf/rmf_demos/pull/208>)
+  * Contributors: Yadunund
+
+ -- Yadunund <yadunund@openrobotics.org>  Wed, 12 Jun 2024 05:00:00 -0000
+
+ros-kilted-rmf-demos-bridges (2.2.3-3noble) noble; urgency=high
+
+
+
+ -- Yadunund <yadunund@openrobotics.org>  Wed, 20 Dec 2023 06:00:00 -0000
+
+ros-kilted-rmf-demos-bridges (2.2.2-3noble) noble; urgency=high
+
+
+
+ -- Yadunund <yadunund@openrobotics.org>  Mon, 28 Aug 2023 05:00:00 -0000
+
+ros-kilted-rmf-demos-bridges (2.2.1-3noble) noble; urgency=high
+
+
+
+ -- Yadunund <yadunund@openrobotics.org>  Thu, 10 Aug 2023 05:00:00 -0000
+
+ros-kilted-rmf-demos-bridges (2.2.0-3noble) noble; urgency=high
+
+
+
+ -- Yadunund <yadunund@openrobotics.org>  Thu, 08 Jun 2023 05:00:00 -0000
+
+ros-kilted-rmf-demos-bridges (2.1.0-3noble) noble; urgency=high
+
+  * Switch to rst changelogs (#182 <https://github.com/open-rmf/rmf_demos/pull/182>)
+  * Version updates from latest release synced to main (#167 <https://github.com/open-rmf/rmf_demos/pull/167>)
+  * Contributors: Esteban Martinena Guerrero, Yadunund
+
+ -- Yadunund <yadunund@openrobotics.org>  Tue, 06 Jun 2023 05:00:00 -0000
+
+ros-kilted-rmf-demos-bridges (2.0.2-3noble) noble; urgency=high
+
+
+
+ -- Yadunund <yadunund@openrobotics.org>  Mon, 10 Oct 2022 05:00:00 -0000
+
+ros-kilted-rmf-demos-bridges (2.0.1-3noble) noble; urgency=high
+
+
+
+ -- Yadunund <yadunund@openrobotics.org>  Thu, 29 Sep 2022 05:00:00 -0000
+
+ros-kilted-rmf-demos-bridges (1.4.0-3noble) noble; urgency=high
+
+  * Provide an example adapter for a delivery robot with indoor-outdoor capabilities (#121 <https://github.com/open-rmf/rmf_demos/pull/121>)
+
+ -- Yadunund <yadunund@openrobotics.org>  Mon, 14 Feb 2022 06:00:00 -0000
+
+
