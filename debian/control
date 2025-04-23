@@ -1,0 +1,12 @@
+Source: ros-kilted-rmf-demos-gz
+Section: misc
+Priority: optional
+Maintainer: Yadunund <yadunund@openrobotics.org>
+Build-Depends: debhelper (>= 9.0.0), ros-kilted-ament-cmake, ros-kilted-ros-workspace
+Homepage: 
+Standards-Version: 3.9.2
+
+Package: ros-kilted-rmf-demos-gz
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ros-kilted-gz-sim-vendor, ros-kilted-launch-xml, ros-kilted-rmf-building-sim-gz-plugins, ros-kilted-rmf-demos, ros-kilted-rmf-robot-sim-gz-plugins, ros-kilted-ros-gz-bridge, ros-kilted-ros2launch, ros-kilted-teleop-twist-keyboard, ros-kilted-ros-workspace
+Description: Launch files for RMF demos using the Gazebo simulator
