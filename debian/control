@@ -1,0 +1,12 @@
+Source: ros-kilted-rmf-demos-fleet-adapter
+Section: misc
+Priority: optional
+Maintainer: Xi Yu Oh <xiyu@openrobotics.org>
+Build-Depends: debhelper (>= 9.0.0), ros-kilted-ament-copyright <!nocheck>, ros-kilted-ament-flake8 <!nocheck>, ros-kilted-ament-pep257 <!nocheck>, ros-kilted-ros-workspace, python3-all, python3-setuptools, dh-python
+Homepage: 
+Standards-Version: 3.9.2
+
+Package: ros-kilted-rmf-demos-fleet-adapter
+Architecture: any
+Depends: ${python3:Depends}, ${misc:Depends}, python3-fastapi, python3-flask-socketio, python3-numpy, python3-pydantic, python3-pyproj, python3-requests, python3-uvicorn, python3-yaml, ros-kilted-launch-xml, ros-kilted-rclpy, ros-kilted-rmf-fleet-adapter-python, ros-kilted-rmf-fleet-msgs, ros-kilted-rmf-task-msgs, ros-kilted-ros-workspace
+Description: Fleet adapters for interfacing with RMF Demos robots with a fleet manager via REST API
