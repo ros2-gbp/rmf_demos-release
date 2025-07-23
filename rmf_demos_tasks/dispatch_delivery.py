@@ -13,6 +13,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+"""Dispatch a delivery."""
 
 import argparse
 import asyncio
@@ -27,6 +28,7 @@ from rclpy.qos import QoSDurabilityPolicy as Durability
 from rclpy.qos import QoSHistoryPolicy as History
 from rclpy.qos import QoSProfile
 from rclpy.qos import QoSReliabilityPolicy as Reliability
+
 from rmf_task_msgs.msg import ApiRequest
 from rmf_task_msgs.msg import ApiResponse
 
@@ -34,8 +36,10 @@ from rmf_task_msgs.msg import ApiResponse
 
 
 class TaskRequester(Node):
+    """Task requester."""
 
     def __init__(self, argv=sys.argv):
+        """Initialize a task requester."""
         super().__init__('task_requester')
         parser = argparse.ArgumentParser()
         parser.add_argument(
@@ -117,6 +121,22 @@ class TaskRequester(Node):
             action='store_true',
             help='Use sim time, default: false',
         )
+        parser.add_argument(
+            '--requester',
+            help='Entity that is requesting this task',
+            type=str,
+            default='rmf_demos_tasks'
+        )
+        parser.add_argument(
+            '-e',
+            '--estimate',
+            action='store_true',
+            help=(
+                'Request an estimate instead of dispatching a task. '
+                'You must specify both the fleet and robot names for this '
+                'setting.'
+            ),
+        )
 
         self.args = parser.parse_args(argv[1:])
         self.response = asyncio.Future()
@@ -157,20 +177,31 @@ class TaskRequester(Node):
         msg.request_id = 'delivery_' + str(uuid.uuid4())
         payload = {}
         if self.args.fleet and self.args.robot:
-            self.get_logger().info("Using 'robot_task_request'")
-            payload['type'] = 'robot_task_request'
+            if self.args.estimate:
+                payload['type'] = 'estimate_robot_task_request'
+            else:
+                payload['type'] = 'robot_task_request'
             payload['robot'] = self.args.robot
             payload['fleet'] = self.args.fleet
         else:
-            self.get_logger().info("Using 'dispatch_task_request'")
+            if self.args.estimate:
+                raise RuntimeError(
+                    'Cannot use --estimate without specifying names for both '
+                    'fleet and robot'
+                )
             payload['type'] = 'dispatch_task_request'
+
+        self.get_logger().info(f"Using '{payload['type']}'")
+
         request = {}
 
-        # Set task request start time
+        # Set task request request time, start time and requester
         now = self.get_clock().now().to_msg()
         now.sec = now.sec + self.args.start_time
         start_time = now.sec * 1000 + round(now.nanosec / 10**6)
+        request['unix_millis_request_time'] = start_time
         request['unix_millis_earliest_start_time'] = start_time
+        request['requester'] = self.args.requester
 
         if self.args.fleet:
             request['fleet_name'] = self.args.fleet
@@ -270,6 +301,7 @@ class TaskRequester(Node):
 
 
 def main(argv=sys.argv):
+    """Dispatch a delivery."""
     rclpy.init(args=sys.argv)
     args_without_ros = rclpy.utilities.remove_ros_args(sys.argv)
 
@@ -278,7 +310,7 @@ def main(argv=sys.argv):
         task_requester, task_requester.response, timeout_sec=5.0
     )
     if task_requester.response.done():
-        print(f'Got response:\n{task_requester.response.result()}')
+        print(f'Got response: \n{task_requester.response.result()}')
     else:
         print('Did not get a response')
     rclpy.shutdown()
