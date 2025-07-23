@@ -14,6 +14,7 @@
 
 import argparse
 import asyncio
+import faulthandler
 import math
 import sys
 import threading
@@ -35,6 +36,7 @@ from rmf_fleet_msgs.msg import ClosedLanes
 from rmf_fleet_msgs.msg import LaneRequest
 from rmf_fleet_msgs.msg import ModeRequest
 from rmf_fleet_msgs.msg import RobotMode
+from rmf_fleet_msgs.msg import SpeedLimitRequest
 import yaml
 
 from .RobotClientAPI import RobotAPI
@@ -46,6 +48,7 @@ from .RobotClientAPI import RobotUpdateData
 # Main
 # ------------------------------------------------------------------------------
 def main(argv=sys.argv):
+    faulthandler.enable()
     # Init rclpy and adapter
     rclpy.init(args=argv)
     rmf_adapter.init_rclcpp()
@@ -117,6 +120,7 @@ def main(argv=sys.argv):
 
     fleet_config.server_uri = server_uri
     fleet_handle = adapter.add_easy_fleet(fleet_config)
+    fleet_handle.more().set_planner_cache_reset_size(2500)
 
     # Initialize robot API for this fleet
     fleet_mgr_yaml = config_yaml['fleet_manager']
@@ -256,8 +260,12 @@ class RobotAdapter:
         if self.execution is not None:
             if self.execution.identifier.is_same(activity):
                 self.execution = None
+                running_cmd_id = self.cmd_id
+                self.cmd_id += 1
+                stop_cmd_id = self.cmd_id
                 self.attempt_cmd_until_success(
-                    cmd=self.api.stop, args=(self.name, self.cmd_id)
+                    cmd=self.api.stop,
+                    args=(self.name, running_cmd_id, stop_cmd_id)
                 )
 
     def execute_action(self, category: str, description: dict, execution):
@@ -274,6 +282,16 @@ class RobotAdapter:
                 self.attempt_cmd_until_success(
                     cmd=self.perform_clean, args=(description['zone'],)
                 )
+            case 'delivery_pickup':
+                self.attempt_cmd_until_success(
+                    cmd=self.api.toggle_attach, args=(
+                        self.name, True, self.cmd_id)
+                )
+            case 'delivery_dropoff':
+                self.attempt_cmd_until_success(
+                    cmd=self.api.toggle_attach, args=(
+                        self.name, False, self.cmd_id)
+                )
 
     def finish_action(self):
         # This is triggered by a ModeRequest callback which allows human
@@ -282,13 +300,15 @@ class RobotAdapter:
         if self.execution is not None:
             self.execution.finished()
             self.execution = None
-            self.attempt_cmd_until_success(
-                cmd=self.api.toggle_teleop, args=(self.name, False)
-            )
+            if self.teleoperation:
+                self.attempt_cmd_until_success(
+                    cmd=self.api.toggle_teleop, args=(self.name, False)
+                )
+                self.teleoperation = None
 
     def perform_docking(self, destination):
         match self.api.start_activity(
-            self.name, self.cmd_id, 'dock', destination.dock()
+            self.name, self.cmd_id, 'dock', destination.dock
         ):
             case (RobotAPIResult.SUCCESS, path):
                 self.override = self.execution.override_schedule(
@@ -443,12 +463,25 @@ def ros_connections(node, robots, fleet_handle):
             closed_lanes.add(lane_idx)
 
         for lane_idx in msg.open_lanes:
-            closed_lanes.remove(lane_idx)
+            if lane_idx in closed_lanes:
+                closed_lanes.remove(lane_idx)
 
         state_msg = ClosedLanes()
         state_msg.fleet_name = fleet_name
         state_msg.closed_lanes = list(closed_lanes)
         closed_lanes_pub.publish(state_msg)
+
+    def speed_limit_request_cb(msg):
+        if msg.fleet_name is None or msg.fleet_name != fleet_name:
+            return
+
+        requests = []
+        for limit in msg.speed_limits:
+            request = rmf_adapter.fleet_update_handle.SpeedLimitRequest(
+                limit.lane_index, limit.speed_limit)
+            requests.append(request)
+        fleet_handle.more().limit_lane_speeds(requests)
+        fleet_handle.more().remove_speed_limits(msg.remove_limits)
 
     def mode_request_cb(msg):
         if (
@@ -471,6 +504,13 @@ def ros_connections(node, robots, fleet_handle):
         qos_profile=qos_profile_system_default,
     )
 
+    speed_limit_request_sub = node.create_subscription(
+        SpeedLimitRequest,
+        'speed_limit_requests',
+        speed_limit_request_cb,
+        qos_profile=qos_profile_system_default,
+    )
+
     action_execution_notice_sub = node.create_subscription(
         ModeRequest,
         'action_execution_notice',
@@ -480,6 +520,7 @@ def ros_connections(node, robots, fleet_handle):
 
     return [
         lane_request_sub,
+        speed_limit_request_sub,
         action_execution_notice_sub,
     ]
 

@@ -129,7 +129,7 @@ class RobotAPI:
             print(f'Other error {robot_name} in start_activity: {err}')
         return RobotAPIResult.RETRY
 
-    def stop(self, robot_name: str, cmd_id: int):
+    def stop(self, robot_name: str, running_cmd_id: int, stop_cmd_id: int):
         """
         Command the robot to stop.
 
@@ -138,7 +138,8 @@ class RobotAPI:
         url = (
             self.prefix
             + f'/open-rmf/rmf_demos_fm/stop_robot?robot_name={robot_name}'
-            f'&cmd_id={cmd_id}'
+            f'&running_cmd_id={running_cmd_id}'
+            f'&stop_cmd_id={stop_cmd_id}'
         )
         try:
             response = requests.get(url, self.timeout)
@@ -173,6 +174,30 @@ class RobotAPI:
             print(f'HTTP error for {robot_name} in toggle_teleop: {http_err}')
         except Exception as err:
             print(f'Other error {robot_name} in toggle_teleop: {err}')
+        return False
+
+    def toggle_attach(self, robot_name: str, attach: bool, cmd_id: int):
+        """
+        Request to attach or detach robot to/from cart.
+
+        Return True if the attach request is successful
+        """
+        url = (
+            self.prefix
+            + f'/open-rmf/rmf_demos_fm/toggle_attach?robot_name={robot_name}'
+            f'&cmd_id={cmd_id}'
+        )
+        data = {'toggle': attach}
+        try:
+            response = requests.post(url, timeout=self.timeout, json=data)
+            response.raise_for_status()
+            if self.debug:
+                print(f'Response: {response.json()}')
+            return response.json()['success']
+        except HTTPError as http_err:
+            print(f'HTTP error for {robot_name} in toggle_attach: {http_err}')
+        except Exception as err:
+            print(f'Other error {robot_name} in toggle_attach: {err}')
         return False
 
     def get_data(self, robot_name: str | None = None):
