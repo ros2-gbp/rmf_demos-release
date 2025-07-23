@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-# Copyright 2022 Open Source Robotics Foundation, Inc.
+# Copyright 2025 Open Source Robotics Foundation, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,12 +13,11 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""Go to place."""
+"""Dynamic Event."""
 
 import argparse
 import asyncio
 import json
-import math
 import sys
 import uuid
 
@@ -48,41 +47,25 @@ class TaskRequester(Node):
         parser.add_argument(
             '-p',
             '--place',
-            required=True,
             type=str,
-            help='Place to go to',
             nargs='+',
-        )
-        parser.add_argument(
-            '-o',
-            '--orientation',
-            required=False,
-            type=float,
-            help='Orientation to face in degrees (optional)',
-        )
-        parser.add_argument(
-            '-m',
-            '--prefer-same-map',
-            required=False,
-            action='store_true',
             help=(
-                'When choosing between multiple destination options, prefer '
-                'an option on the same map as the starting location.'
+                'Place(s) for the fleet adapter to estimate the robot will '
+                'go. If more than one is listed, the fleet adapter will '
+                'choose the closest reachable place. This cannot be used with '
+                '--file.',
             ),
         )
         parser.add_argument(
-            '-st',
-            '--start_time',
-            help='Start time from now in secs, default: 0',
-            type=int,
-            default=0,
-        )
-        parser.add_argument(
-            '-pt',
-            '--priority',
-            help='Priority value for this request',
-            type=int,
-            default=0,
+            '-f',
+            '--file',
+            type=str,
+            help=(
+                'File containing a json object containing at least '
+                '{{ "category": -, "description": - }}. The contents of this '
+                'file will be used as the estimate of the dynamic event. This '
+                'cannot be used with --place.'
+            ),
         )
         parser.add_argument(
             '--use_sim_time',
@@ -96,17 +79,78 @@ class TaskRequester(Node):
             default='rmf_demos_tasks'
         )
         parser.add_argument(
-            '-e',
-            '--estimate',
-            action='store_true',
+            '-r',
+            '--required',
+            type=str,
+            nargs='+',
             help=(
-                'Request an estimate instead of dispatching a task. '
-                'You must specify both the fleet and robot names for this '
-                'setting.'
+                'Add an action capability requirement for the selected fleet. '
+                'This takes the form of a file containing '
+                '{{ "category": -, "description": - }}, similar to --file. '
+                'The fleet must be able to execute the described event. More '
+                'than one file can be specified and each one will be required.'
             ),
+        )
+        parser.add_argument(
+            '--parameters',
+            type=str,
+            help=(
+                'File containing a json object for the parameters of the '
+                'dynamic event. These parameters will be published with the '
+                'dynamic event information when the event begins.'
+            ),
+        )
+        parser.add_argument(
+            '--detail',
+            type=str,
+            help='Human-friendly detailed description of the dynamic event.',
         )
 
         self.args = parser.parse_args(argv[1:])
+
+        if self.args.file and self.args.place:
+            raise RuntimeError(
+                'You cannot use both --file and --place at the same time.'
+            )
+
+        request_file_contents = None
+        if self.args.file:
+            with open(self.args.file) as f:
+                request_file_contents = json.load(f)
+
+            if (
+                'category' not in request_file_contents
+                or 'description' not in request_file_contents
+            ):
+                raise RuntimeError(
+                    f'The input json file {self.args.file} must have an '
+                    f'object that contains both a "category" and a '
+                    '"description" field.'
+                )
+
+        event_parameters = None
+        if self.args.parameters:
+            with open(self.args.parameters) as f:
+                event_parameters = json.load(f)
+
+        required = []
+        if self.args.required:
+            for req_file in self.args.required:
+                with open(req_file) as f:
+                    req_contents = json.load(f)
+
+                if (
+                    'category' not in req_contents
+                    or 'description' not in req_contents
+                ):
+                    raise RuntimeError(
+                        f'The input json file {req_file} must have an object '
+                        'that contains both a "category" and a "description" '
+                        'field.'
+                    )
+
+                required.append(req_contents)
+
         self.response = asyncio.Future()
 
         transient_qos = QoSProfile(
@@ -132,55 +176,60 @@ class TaskRequester(Node):
         payload = {}
 
         if self.args.robot and self.args.fleet:
-            if self.args.estimate:
-                payload['type'] = 'estimate_robot_task_request'
-            else:
-                payload['type'] = 'robot_task_request'
+            self.get_logger().info("Using 'robot_task_request'")
+            payload['type'] = 'robot_task_request'
             payload['robot'] = self.args.robot
             payload['fleet'] = self.args.fleet
         else:
-            if self.args.estimate:
-                raise RuntimeError(
-                    'Cannot use --estimate without specifying names for both '
-                    'fleet and robot'
-                )
+            self.get_logger().info("Using 'dispatch_task_request'")
             payload['type'] = 'dispatch_task_request'
-
-        self.get_logger().info(f"Using '{payload['type']}'")
 
         # Set task request start time
         now = self.get_clock().now().to_msg()
-        now.sec = now.sec + self.args.start_time
         start_time = now.sec * 1000 + round(now.nanosec / 10**6)
         # todo(YV): Fill priority after schema is added
 
-        # Define task request description
-        one_of = []
-        for place in self.args.place:
-            place_json = {'waypoint': place}
-            if self.args.orientation is not None:
-                place_json['orientation'] = (
-                    self.args.orientation * math.pi / 180.0
-                )
-            one_of.append(place_json)
+        category = None
+        estimate = None
+        if self.args.place:
+            category = 'go_to_place'
+            estimate = {
+                'category': 'go_to_place',
+                'description': {
+                    'one_of': self.args.place
+                }
+            }
 
-        go_to_description = {'one_of': one_of}
+        if request_file_contents:
+            category = request_file_contents['category']
+            estimate = request_file_contents
 
-        if self.args.prefer_same_map:
-            go_to_description['constraints'] = [
-                {'category': 'prefer_same_map'}
-            ]
+        description = {
+            'required': required,
+        }
 
-        go_to_activity = {
-            'category': 'go_to_place',
-            'description': go_to_description,
+        if category:
+            description['category'] = category
+
+        if estimate:
+            description['estimate'] = estimate
+
+        if event_parameters:
+            description['parameters'] = event_parameters
+
+        if self.args.detail:
+            description['detail'] = self.args.detail
+
+        dynamic_event_activity = {
+            'category': 'dynamic_event',
+            'description': description,
         }
 
         rmf_task_request = {
             'category': 'compose',
             'description': {
-                'category': 'go_to_place',
-                'phases': [{'activity': go_to_activity}],
+                'category': 'dynamic_event',
+                'phases': [{'activity': dynamic_event_activity}],
             },
             'unix_millis_request_time': start_time,
             'unix_millis_earliest_start_time': start_time,
