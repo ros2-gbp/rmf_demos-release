@@ -2,6 +2,19 @@
 Changelog for package rmf_demos_maps
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+2.8.0 (2025-07-21)
+------------------
+* Use builtin gazebo model downloading (`#307 <https://github.com/open-rmf/rmf_demos/issues/307>`_)
+* Contributors: Luca Della Vedova
+
+2.7.0 (2025-06-09)
+------------------
+
+2.6.0 (2025-05-09)
+------------------
+* Change robot types to include a namespace (`#272 <https://github.com/open-rmf/rmf_demos/issues/272>`_)
+* Contributors: Luca Della Vedova
+
 2.5.0 (2024-11-27)
 ------------------
 * Add proto-reservation node as core part of RMF (`#212 <https://github.com/open-rmf/rmf_demos/issues/212>`_)
