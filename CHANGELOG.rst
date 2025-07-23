@@ -2,6 +2,29 @@
 Changelog for package rmf_demos_tasks
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+2.8.0 (2025-07-21)
+------------------
+
+2.7.0 (2025-06-09)
+------------------
+
+2.6.0 (2025-05-09)
+------------------
+* Dynamic events CLI scripts (`#296 <https://github.com/open-rmf/rmf_demos/issues/296>`_)
+* Adds a script to cancel the currently executing task on a specific robot. (`#286 <https://github.com/open-rmf/rmf_demos/issues/286>`_)
+* Introduce --estimate option to some task dispatch scripts (`#287 <https://github.com/open-rmf/rmf_demos/issues/287>`_)
+* Emergency signal script (`#288 <https://github.com/open-rmf/rmf_demos/issues/288>`_)
+* created .gitignore in rmf_demos_task for ignoring pycache files. (`#281 <https://github.com/open-rmf/rmf_demos/issues/281>`_)
+* Contributors: Arjo Chakravarty, Francesco Fallica, Grey, Jun
+
+2.5.0 (2024-11-27)
+------------------
+* Add proto-reservation node as core part of RMF (`#212 <https://github.com/open-rmf/rmf_demos/issues/212>`_)
+* Fix existing style issues (`#252 <https://github.com/open-rmf/rmf_demos/issues/252>`_)
+* Add attach cart action (`#225 <https://github.com/open-rmf/rmf_demos/issues/225>`_)
+* Adding requester and request time for dispatch scripts (`#240 <https://github.com/open-rmf/rmf_demos/issues/240>`_)
+* Contributors: Aaron Chong, Arjo Chakravarty, Luca Della Vedova, Xiyu
+
 2.4.0 (2024-06-12)
 ------------------
 
