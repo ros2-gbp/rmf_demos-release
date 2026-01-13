@@ -1,0 +1,114 @@
+ros-rolling-rmf-demos-gz (2.8.1-1bookworm) bookworm; urgency=high
+
+  * Switch to using ros_gz_sim to run Gazebo (#344 <https://github.com/open-rmf/rmf_demos/issues/344>)
+  * Contributors: Luca Della Vedova
+
+ -- Yadunund <yadunund@openrobotics.org>  Mon, 12 Jan 2026 16:00:00 -0000
+
+ros-rolling-rmf-demos-gz (2.8.0-1bookworm) bookworm; urgency=high
+
+  * Use builtin gazebo model downloading (#307 <https://github.com/open-rmf/rmf_demos/issues/307>)
+  * Contributors: Luca Della Vedova
+
+ -- Yadunund <yadunund@openrobotics.org>  Sun, 20 Jul 2025 16:00:00 -0000
+
+ros-rolling-rmf-demos-gz (2.7.0-1bookworm) bookworm; urgency=high
+
+  * Remove gazebo_version argument (#305 <https://github.com/open-rmf/rmf_demos/issues/305>)
+    * Version independent default gazebo
+    * Remove gazebo version altogether
+    * Remove gazebo_version from README
+    ---------
+  * Contributors: Luca Della Vedova
+
+ -- Yadunund <yadunund@openrobotics.org>  Sun, 08 Jun 2025 16:00:00 -0000
+
+ros-rolling-rmf-demos-gz (2.6.0-1bookworm) bookworm; urgency=high
+
+  * Use 9 as default gazebo_version (#292 <https://github.com/open-rmf/rmf_demos/issues/292>)
+  * Remove redundant launch file (#271 <https://github.com/open-rmf/rmf_demos/issues/271>)
+  * Contributors: Arjo Chakravarty, Grey
+
+ -- Yadunund <yadunund@openrobotics.org>  Thu, 08 May 2025 16:00:00 -0000
+
+ros-rolling-rmf-demos-gz (2.5.0-1bookworm) bookworm; urgency=high
+
+  * Add proto-reservation node as core part of RMF (#212 <https://github.com/open-rmf/rmf_demos/issues/212>)
+  * Adds the ability to set the update rate of the simulation (#264 <https://github.com/open-rmf/rmf_demos/issues/264>)
+  * Use environment hooks for plugins / assets (#262 <https://github.com/open-rmf/rmf_demos/issues/262>)
+  * Contributors: Arjo Chakravarty, Luca Della Vedova
+
+ -- Yadunund <yadunund@openrobotics.org>  Tue, 26 Nov 2024 16:00:00 -0000
+
+ros-rolling-rmf-demos-gz (2.4.0-1bookworm) bookworm; urgency=high
+
+
+
+ -- Yadunund <yadunund@openrobotics.org>  Tue, 11 Jun 2024 16:00:00 -0000
+
+ros-rolling-rmf-demos-gz (2.3.0-1bookworm) bookworm; urgency=high
+
+  * Port to harmonic (#206 <https://github.com/open-rmf/rmf_demos/issues/206>)
+  * Moved rmf_demos to use ros_gz_bridge instead of ros_ign_bridge (#173 <https://github.com/open-rmf/rmf_demos/issues/173>)
+  * Contributors: Arjo Chakravarty, Luca Della Vedova, Michael X. Grey, Yadunund
+
+ -- Yadunund <yadunund@openrobotics.org>  Tue, 11 Jun 2024 16:00:00 -0000
+
+ros-rolling-rmf-demos-gz (2.2.3-1bookworm) bookworm; urgency=high
+
+
+
+ -- Yadunund <yadunund@openrobotics.org>  Tue, 19 Dec 2023 16:00:00 -0000
+
+ros-rolling-rmf-demos-gz (2.2.2-1bookworm) bookworm; urgency=high
+
+
+
+ -- Yadunund <yadunund@openrobotics.org>  Sun, 27 Aug 2023 16:00:00 -0000
+
+ros-rolling-rmf-demos-gz (2.2.1-1bookworm) bookworm; urgency=high
+
+
+
+ -- Yadunund <yadunund@openrobotics.org>  Wed, 09 Aug 2023 16:00:00 -0000
+
+ros-rolling-rmf-demos-gz (2.2.0-1bookworm) bookworm; urgency=high
+
+
+
+ -- Yadunund <yadunund@openrobotics.org>  Wed, 07 Jun 2023 16:00:00 -0000
+
+ros-rolling-rmf-demos-gz (2.1.0-1bookworm) bookworm; urgency=high
+
+  * Switch to rst changelogs (#182 <https://github.com/open-rmf/rmf_demos/pull/182>)
+  * Version updates from latest release synced to main (#167 <https://github.com/open-rmf/rmf_demos/pull/167>)
+  * Contributors: Esteban Martinena Guerrero, Yadunund
+
+ -- Yadunund <yadunund@openrobotics.org>  Mon, 05 Jun 2023 16:00:00 -0000
+
+ros-rolling-rmf-demos-gz (2.0.2-1bookworm) bookworm; urgency=high
+
+
+
+ -- Yadunund <yadunund@openrobotics.org>  Sun, 09 Oct 2022 16:00:00 -0000
+
+ros-rolling-rmf-demos-gz (2.0.1-1bookworm) bookworm; urgency=high
+
+  * Renamed to rmf_demos_gz
+
+ -- Yadunund <yadunund@openrobotics.org>  Wed, 28 Sep 2022 16:00:00 -0000
+
+ros-rolling-rmf-demos-gz (1.3.1-1bookworm) bookworm; urgency=high
+
+  * Added diff_drive plugin dependencies for caddy (#111 <https://github.com/open-rmf/rmf_demos/pull/111>)
+  * Modified plugin path to match rmf_simulation install (#108 <https://github.com/open-rmf/rmf_demos/pull/108>)
+
+ -- Yadunund <yadunund@openrobotics.org>  Mon, 29 Nov 2021 16:00:00 -0000
+
+ros-rolling-rmf-demos-gz (1.3.0-1bookworm) bookworm; urgency=high
+
+  * Provides launch files for running various demonstrations in ignition-gazebo
+
+ -- Yadunund <yadunund@openrobotics.org>  Tue, 07 Sep 2021 16:00:00 -0000
+
+
