@@ -1,0 +1,160 @@
+ros-rolling-rmf-demos (2.8.1-1bookworm) bookworm; urgency=high
+
+  * Add use_site_map param (#338 <https://github.com/open-rmf/rmf_demos/issues/338>)
+  * Contributors: Xiyu
+
+ -- Yadunund <yadunund@openrobotics.org>  Mon, 12 Jan 2026 16:00:00 -0000
+
+ros-rolling-rmf-demos (2.8.0-1bookworm) bookworm; urgency=high
+
+  * Add mutex group supervisor to common launch file (#310 <https://github.com/open-rmf/rmf_demos/issues/310>)
+    Co-authored-by: yadunund <mailto:yadunund@intrinsic.ai>
+  * Contributors: Grey
+
+ -- Yadunund <yadunund@openrobotics.org>  Sun, 20 Jul 2025 16:00:00 -0000
+
+ros-rolling-rmf-demos (2.7.0-1bookworm) bookworm; urgency=high
+
+
+
+ -- Yadunund <yadunund@openrobotics.org>  Sun, 08 Jun 2025 16:00:00 -0000
+
+ros-rolling-rmf-demos (2.6.0-1bookworm) bookworm; urgency=high
+
+  * Dynamic events CLI scripts (#296 <https://github.com/open-rmf/rmf_demos/issues/296>)
+    Co-authored-by: tanjunkiat <mailto:tanjunkiat@outlook.sg>
+  * Add missing dep for rmf_reservation_node (#297 <https://github.com/open-rmf/rmf_demos/issues/297>)
+  * Contributors: Aaron Chong, Grey
+
+ -- Yadunund <yadunund@openrobotics.org>  Thu, 08 May 2025 16:00:00 -0000
+
+ros-rolling-rmf-demos (2.5.0-1bookworm) bookworm; urgency=high
+
+  * Provide example for robot-specific finishing request (#255 <https://github.com/open-rmf/rmf_demos/issues/255>)
+  * Add proto-reservation node as core part of RMF (#212 <https://github.com/open-rmf/rmf_demos/issues/212>)
+  * Contributors: Arjo Chakravarty, Xiyu
+
+ -- Yadunund <yadunund@openrobotics.org>  Tue, 26 Nov 2024 16:00:00 -0000
+
+ros-rolling-rmf-demos (2.4.0-1bookworm) bookworm; urgency=high
+
+
+
+ -- Yadunund <yadunund@openrobotics.org>  Tue, 11 Jun 2024 16:00:00 -0000
+
+ros-rolling-rmf-demos (2.3.0-1bookworm) bookworm; urgency=high
+
+  * Remove rmf_demos_panel (#235 <https://github.com/open-rmf/rmf_demos/pull/235>)
+  * Use same empty string default value as fleet adapter launches (#237 <https://github.com/open-rmf/rmf_demos/pull/237>)
+  * Adding server_uri for dispatcher node (#230 <https://github.com/open-rmf/rmf_demos/pull/230>)
+  * Add task reassignment trigger in update loop (#228 <https://github.com/open-rmf/rmf_demos/pull/228>)
+  * Use unique hex strings for new task IDs (#205 <https://github.com/open-rmf/rmf_demos/pull/205>)
+  * Fix airport terminal demo (#204 <https://github.com/open-rmf/rmf_demos/pull/204>)
+  * Contributors: Aaron Chong, Luca Della Vedova, Xiyu, Yadunund
+
+ -- Yadunund <yadunund@openrobotics.org>  Tue, 11 Jun 2024 16:00:00 -0000
+
+ros-rolling-rmf-demos (2.2.3-1bookworm) bookworm; urgency=high
+
+
+
+ -- Yadunund <yadunund@openrobotics.org>  Tue, 19 Dec 2023 16:00:00 -0000
+
+ros-rolling-rmf-demos (2.2.2-1bookworm) bookworm; urgency=high
+
+  * EasyFullControl integration with rmf_demos (#158 <https://github.com/open-rmf/rmf_demos/pull/158>)
+  * Contributors: Aaron Chong, Grey, Xiyu, Yadunund
+
+ -- Yadunund <yadunund@openrobotics.org>  Sun, 27 Aug 2023 16:00:00 -0000
+
+ros-rolling-rmf-demos (2.2.1-1bookworm) bookworm; urgency=high
+
+
+
+ -- Yadunund <yadunund@openrobotics.org>  Wed, 09 Aug 2023 16:00:00 -0000
+
+ros-rolling-rmf-demos (2.2.0-1bookworm) bookworm; urgency=high
+
+
+
+ -- Yadunund <yadunund@openrobotics.org>  Wed, 07 Jun 2023 16:00:00 -0000
+
+ros-rolling-rmf-demos (2.1.0-1bookworm) bookworm; urgency=high
+
+  * Switch to rst changelogs (#182 <https://github.com/open-rmf/rmf_demos/pull/182>)
+  * Version updates from latest release synced to main (#167 <https://github.com/open-rmf/rmf_demos/pull/167>)
+  * Contributors: Esteban Martinena Guerrero, Yadunund
+
+ -- Yadunund <yadunund@openrobotics.org>  Mon, 05 Jun 2023 16:00:00 -0000
+
+ros-rolling-rmf-demos (2.0.2-1bookworm) bookworm; urgency=high
+
+
+
+ -- Yadunund <yadunund@openrobotics.org>  Sun, 09 Oct 2022 16:00:00 -0000
+
+ros-rolling-rmf-demos (2.0.1-1bookworm) bookworm; urgency=high
+
+
+
+ -- Yadunund <yadunund@openrobotics.org>  Wed, 28 Sep 2022 16:00:00 -0000
+
+ros-rolling-rmf-demos (1.4.0-1bookworm) bookworm; urgency=high
+
+  * Add an indoor-outdoor campus example (#121 <https://github.com/open-rmf/rmf_demos/pull/121>)
+
+ -- Yadunund <yadunund@openrobotics.org>  Sun, 13 Feb 2022 16:00:00 -0000
+
+ros-rolling-rmf-demos (1.3.1-1bookworm) bookworm; urgency=high
+
+  * migrate rmf_panel js component to a new repo (#93 <https://github.com/open-rmf/rmf_demos/pull/93>)
+
+ -- Yadunund <yadunund@openrobotics.org>  Tue, 21 Sep 2021 16:00:00 -0000
+
+ros-rolling-rmf-demos (1.3.0-1bookworm) bookworm; urgency=high
+
+  * Add finishing_request parameter to fleet adapters: (#83 <https://github.com/open-rmf/rmf_demos/pull/83>)
+  * Split launch files for ignition and gazebo simulators: (#78 <https://github.com/open-rmf/rmf_demos/pull/77>), (#80 <https://github.com/open-rmf/rmf_demos/pull/80>)
+  * Add reversible parameter to deliveryRobot and tinyRobot adapters: (#74 <https://github.com/open-rmf/rmf_demos/pull/74>)
+  * Fix crash in airport terminal world due to required attribute: (#69 <https://github.com/open-rmf/rmf_demos/pull/69>)
+
+ -- Yadunund <yadunund@openrobotics.org>  Tue, 07 Sep 2021 16:00:00 -0000
+
+ros-rolling-rmf-demos (1.2.0-1bookworm) bookworm; urgency=high
+
+  * Secured Ros2 office demo. (#135 <https://github.com/osrf/rmf_demos/pull/135>)
+  * Traffic Light Scenarios. (#168 <https://github.com/osrf/rmf_demos/pull/168>)
+  * Rename demos package to rmf_demos
+  * update all namings with rmf_demos as prefix (#1 <https://github.com/open-rmf/rmf_demos/pull/1>)
+  * Match renamed packages (#4 <https://github.com/open-rmf/rmf_demos/pull/4>)
+  * Cleaning task demo in Airport terminal (#8 <https://github.com/open-rmf/rmf_demos/pull/8>)
+  * Separate nav graphs for CleanerBotA and CleanerBotE (#10 <https://github.com/open-rmf/rmf_demos/pull/10>)
+  * Reduce tinyRobot vicinity to be less disruptive (#13 <https://github.com/open-rmf/rmf_demos/pull/13>)
+  * rename dependency following recent refactor (#17 <https://github.com/open-rmf/rmf_demos/pull/17>)
+  * Update ignition launch for new sim plugin names (#19 <https://github.com/open-rmf/rmf_demos/pull/19>)
+  * Feature/add crowdsim example (#14 <https://github.com/open-rmf/rmf_demos/pull/14>)
+  * Remove server.launch.xml (#11 <https://github.com/open-rmf/rmf_demos/pull/11>)
+  * fix caddy discover timeout (#23 <https://github.com/open-rmf/rmf_demos/pull/23>)
+  * Changes after renaming packages in rmf_visualization (#26 <https://github.com/open-rmf/rmf_demos/pull/26>)
+  * refactoring to bring use_sim_time to a single global definition (#31 <https://github.com/open-rmf/rmf_demos/pull/31>)
+
+ -- Yadunund <yadunund@openrobotics.org>  Tue, 20 Jul 2021 16:00:00 -0000
+
+ros-rolling-rmf-demos (1.1.0-1bookworm) bookworm; urgency=high
+
+  * Update dependency. (#101 <https://github.com/osrf/rmf_demos/pull/101>)
+  * Support demos on ROS 2 Foxy and Eloquent. (#103 <https://github.com/osrf/rmf_demos/pull/103>)
+  * Add subscription to floorplan topic published by rmf_schedule_visualizer. (#133 <https://github.com/osrf/rmf_demos/pull/133>)
+  * Added Triple H scenario and The Pedigree conflict launch file: (#139 <https://github.com/osrf/rmf_demos/pull/139>)
+  * Contributors: Aaron Chong, Grey, Kevin_Skywalker, Michael X. Grey, Yadu, ddengster, kevinskwk, mrushyendra, youliang
+
+ -- Yadunund <yadunund@openrobotics.org>  Tue, 22 Sep 2020 16:00:00 -0000
+
+ros-rolling-rmf-demos (1.0.0-1bookworm) bookworm; urgency=high
+
+  * Provides launch files to launch the Office and Airport Terminal simulations worlds along with the necessary RMF backend services.
+  * Contributors: Aaron, Aaron Chong, Boon Han, Charayaphan Nakorn Boon Han, Morgan Quigley, Yadu, Yadunund
+
+ -- Yadunund <yadunund@openrobotics.org>  Tue, 23 Jun 2020 16:00:00 -0000
+
+
