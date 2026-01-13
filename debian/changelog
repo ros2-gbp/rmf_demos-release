@@ -1,0 +1,123 @@
+ros-rolling-rmf-demos-assets (2.8.1-1bookworm) bookworm; urgency=high
+
+
+
+ -- Yadunund <yadunund@openrobotics.org>  Mon, 12 Jan 2026 16:00:00 -0000
+
+ros-rolling-rmf-demos-assets (2.8.0-1bookworm) bookworm; urgency=high
+
+
+
+ -- Yadunund <yadunund@openrobotics.org>  Sun, 20 Jul 2025 16:00:00 -0000
+
+ros-rolling-rmf-demos-assets (2.7.0-1bookworm) bookworm; urgency=high
+
+
+
+ -- Yadunund <yadunund@openrobotics.org>  Sun, 08 Jun 2025 16:00:00 -0000
+
+ros-rolling-rmf-demos-assets (2.6.0-1bookworm) bookworm; urgency=high
+
+
+
+ -- Yadunund <yadunund@openrobotics.org>  Thu, 08 May 2025 16:00:00 -0000
+
+ros-rolling-rmf-demos-assets (2.5.0-1bookworm) bookworm; urgency=high
+
+  * Use environment hooks for plugins / assets (#262 <https://github.com/open-rmf/rmf_demos/issues/262>)
+  * Contributors: Luca Della Vedova
+
+ -- Yadunund <yadunund@openrobotics.org>  Tue, 26 Nov 2024 16:00:00 -0000
+
+ros-rolling-rmf-demos-assets (2.4.0-1bookworm) bookworm; urgency=high
+
+
+
+ -- Yadunund <yadunund@openrobotics.org>  Tue, 11 Jun 2024 16:00:00 -0000
+
+ros-rolling-rmf-demos-assets (2.3.0-1bookworm) bookworm; urgency=high
+
+
+
+ -- Yadunund <yadunund@openrobotics.org>  Tue, 11 Jun 2024 16:00:00 -0000
+
+ros-rolling-rmf-demos-assets (2.2.3-1bookworm) bookworm; urgency=high
+
+
+
+ -- Yadunund <yadunund@openrobotics.org>  Tue, 19 Dec 2023 16:00:00 -0000
+
+ros-rolling-rmf-demos-assets (2.2.2-1bookworm) bookworm; urgency=high
+
+
+
+ -- Yadunund <yadunund@openrobotics.org>  Sun, 27 Aug 2023 16:00:00 -0000
+
+ros-rolling-rmf-demos-assets (2.2.1-1bookworm) bookworm; urgency=high
+
+
+
+ -- Yadunund <yadunund@openrobotics.org>  Wed, 09 Aug 2023 16:00:00 -0000
+
+ros-rolling-rmf-demos-assets (2.2.0-1bookworm) bookworm; urgency=high
+
+
+
+ -- Yadunund <yadunund@openrobotics.org>  Wed, 07 Jun 2023 16:00:00 -0000
+
+ros-rolling-rmf-demos-assets (2.1.0-1bookworm) bookworm; urgency=high
+
+  * Switch to rst changelogs (#182 <https://github.com/open-rmf/rmf_demos/pull/182>)
+  * Version updates from latest release synced to main (#167 <https://github.com/open-rmf/rmf_demos/pull/167>)
+  * Contributors: Esteban Martinena Guerrero, Yadunund
+
+ -- Yadunund <yadunund@openrobotics.org>  Mon, 05 Jun 2023 16:00:00 -0000
+
+ros-rolling-rmf-demos-assets (2.0.2-1bookworm) bookworm; urgency=high
+
+
+
+ -- Yadunund <yadunund@openrobotics.org>  Sun, 09 Oct 2022 16:00:00 -0000
+
+ros-rolling-rmf-demos-assets (2.0.1-1bookworm) bookworm; urgency=high
+
+
+
+ -- Yadunund <yadunund@openrobotics.org>  Wed, 28 Sep 2022 16:00:00 -0000
+
+ros-rolling-rmf-demos-assets (1.3.0-1bookworm) bookworm; urgency=high
+
+  * Removed gazebo related dependencies: (#81 <https://github.com/open-rmf/rmf_demos/pull/81>)
+  * Added reversible parameter to specify whether a robot can drive backwards: (#77 <https://github.com/open-rmf/rmf_demos/pull/77>)
+
+ -- Yadunund <yadunund@openrobotics.org>  Tue, 07 Sep 2021 16:00:00 -0000
+
+ros-rolling-rmf-demos-assets (1.2.0-1bookworm) bookworm; urgency=high
+
+  * Changed DeliveryRobot texture name to avoid Ignition rendering issue. (#142 <https://github.com/osrf/rmf_demos/pull/142>)
+  * Match renamed packages (#4 <https://github.com/open-rmf/rmf_demos/pull/4>)
+  * Cleaning task demo in Airport terminal (#8 <https://github.com/open-rmf/rmf_demos/pull/8>)
+  * Separate nav graphs for CleanerBotA and CleanerBotE (#10 <https://github.com/open-rmf/rmf_demos/pull/10>)
+  * account for refactor from building_gazebo_plugins to rmf_building_sim (#15 <https://github.com/open-rmf/rmf_demos/pull/15>)
+  * Fix out of range values for sdf compliance (#22 <https://github.com/open-rmf/rmf_demos/pull/22>)
+
+ -- Yadunund <yadunund@openrobotics.org>  Tue, 20 Jul 2021 16:00:00 -0000
+
+ros-rolling-rmf-demos-assets (1.1.0-1bookworm) bookworm; urgency=high
+
+  * Moved majority of models to Ignition Fuel collections. (#89 <https://github.com/osrf/rmf_demos/pull/89>)
+  * Added HostpitalRobot Model and renamed older robot models to DeliveryRobot and TinyRobot. (#114 <https://github.com/osrf/rmf_demos/pull/114>), (#115 <https://github.com/osrf/rmf_demos/pull/115>)
+  * Imaginary clinic world and hotel world (#120 <https://github.com/osrf/rmf_demos/pull/120>)
+  * Updated inertial values in Caddy model. (#129 <https://github.com/osrf/rmf_demos/pull/129>)
+  * Contributors: Kevin_Skywalker, Michael X. Grey, Rushyendra Maganty, Yadu, kevinskwk
+
+ -- Yadunund <yadunund@openrobotics.org>  Wed, 23 Sep 2020 16:00:00 -0000
+
+ros-rolling-rmf-demos-assets (1.0.0-1bookworm) bookworm; urgency=high
+
+  * Provides open source 3D assets for use in simulation
+  * Contributors: Aaron, Aaron Chong, Charayaphan Nakorn Boon Han, Morgan Quigley, Yadu, Yadunund, ngwk1
+
+ -- Yadunund <yadunund@openrobotics.org>  Tue, 23 Jun 2020 16:00:00 -0000
+
+
