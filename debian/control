@@ -1,0 +1,12 @@
+Source: ros-lyrical-rmf-demos-gz
+Section: misc
+Priority: optional
+Maintainer: Yadunund <yadunund@openrobotics.org>
+Build-Depends: debhelper (>= 9.0.0), ros-lyrical-ament-cmake, ros-lyrical-ros-workspace
+Homepage: https://index.ros.org/p/rmf_demos_gz/#lyrical
+Standards-Version: 3.9.2
+
+Package: ros-lyrical-rmf-demos-gz
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ros-lyrical-launch-xml, ros-lyrical-rmf-building-sim-gz-plugins, ros-lyrical-rmf-demos, ros-lyrical-rmf-robot-sim-gz-plugins, ros-lyrical-ros-gz-bridge, ros-lyrical-ros-gz-sim, ros-lyrical-ros2launch, ros-lyrical-teleop-twist-keyboard, ros-lyrical-ros-workspace
+Description: Launch files for RMF demos using the Gazebo simulator
