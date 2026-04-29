@@ -1,0 +1,12 @@
+Source: ros-lyrical-rmf-demos
+Section: misc
+Priority: optional
+Maintainer: Yadunund <yadunund@openrobotics.org>
+Build-Depends: debhelper (>= 9.0.0), ros-lyrical-ament-cmake, ros-lyrical-ros-workspace
+Homepage: https://index.ros.org/p/rmf_demos/#lyrical
+Standards-Version: 3.9.2
+
+Package: ros-lyrical-rmf-demos
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ros-lyrical-launch-xml, ros-lyrical-rmf-building-map-tools, ros-lyrical-rmf-demos-assets, ros-lyrical-rmf-demos-fleet-adapter, ros-lyrical-rmf-demos-maps, ros-lyrical-rmf-demos-tasks, ros-lyrical-rmf-fleet-adapter, ros-lyrical-rmf-reservation-node, ros-lyrical-rmf-task-ros2, ros-lyrical-rmf-traffic-ros2, ros-lyrical-rmf-visualization, ros-lyrical-rviz2, ros-lyrical-ros-workspace
+Description: Common launch files for RMF demos
