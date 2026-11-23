@@ -16,7 +16,6 @@
 """Teleop a robot."""
 
 import argparse
-import asyncio
 import sys
 import uuid
 
@@ -96,7 +95,7 @@ def main(argv=sys.argv):
     args_without_ros = rclpy.utilities.remove_ros_args(sys.argv)
     requester = Requester(args_without_ros)
 
-    timeout = asyncio.Future()
+    timeout = rclpy.Future()
 
     def trigger_timeout():
         timeout.set_result(True)
