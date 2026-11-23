@@ -2,36 +2,12 @@
 Changelog for package rmf_demos_assets
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-2.11.0 (2026-11-13)
--------------------
-* bump cmake version (`#366 <https://github.com/open-rmf/rmf_demos/issues/366>`_)
-* Contributors: Aaron Chong
-
-2.10.0 (2026-09-26)
--------------------
-
-2.9.0 (2026-06-17)
+2.4.1 (2026-11-23)
 ------------------
-
-2.8.2 (2026-02-23)
-------------------
-
-2.8.1 (2026-01-13)
-------------------
-
-2.8.0 (2025-07-21)
-------------------
-
-2.7.0 (2025-06-09)
-------------------
-
-2.6.0 (2025-05-09)
-------------------
-
-2.5.0 (2024-11-27)
-------------------
-* Use environment hooks for plugins / assets (`#262 <https://github.com/open-rmf/rmf_demos/issues/262>`_)
-* Contributors: Luca Della Vedova
+* Use environment hooks for plugins / assets (`#262 <https://github.com/open-rmf/rmf_demos/issues/262>`_) (`#304 <https://github.com/open-rmf/rmf_demos/issues/304>`_)
+  * Use environment hooks for plugins / assets (`#262 <https://github.com/open-rmf/rmf_demos/issues/262>`_)
+  * Build CI against jazzy
+* Contributors: Xiyu
 
 2.4.0 (2024-06-12)
 ------------------

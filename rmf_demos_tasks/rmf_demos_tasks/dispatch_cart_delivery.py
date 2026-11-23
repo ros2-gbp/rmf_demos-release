@@ -13,9 +13,9 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""Dispatch a cart delivery."""
 
 import argparse
+import asyncio
 import json
 import sys
 import uuid
@@ -34,10 +34,8 @@ from rmf_task_msgs.msg import ApiRequest, ApiResponse
 ###############################################################################
 
 class TaskRequester(Node):
-    """Task requester."""
 
     def __init__(self, argv=sys.argv):
-        """Initialize a task requester."""
         super().__init__('task_requester')
         parser = argparse.ArgumentParser()
         parser.add_argument('-p', '--pickup', required=True,
@@ -58,26 +56,9 @@ class TaskRequester(Node):
                             type=int, default=0)
         parser.add_argument('--use_sim_time', action='store_true',
                             help='Use sim time, default: false')
-        parser.add_argument(
-            '--timeout',
-            type=float,
-            default=5.0,
-            help='Timeout in seconds to wait for a response, default: 5.0',
-        )
-        parser.add_argument(
-            '--duration_secs',
-            help='Estimated action duration in seconds, default: 10',
-            type=int,
-            default=10,
-        )
-        parser.add_argument(
-            '--use_tool_sink',
-            action='store_true',
-            help='Use tool sink during perform action, default: false',
-        )
 
         self.args = parser.parse_args(argv[1:])
-        self.response = rclpy.Future()
+        self.response = asyncio.Future()
 
         transient_qos = QoSProfile(
             history=History.KEEP_LAST,
@@ -114,20 +95,21 @@ class TaskRequester(Node):
         start_time = now.sec * 1000 + round(now.nanosec/10**6)
         request['unix_millis_earliest_start_time'] = start_time
 
-        def __create_perform_action(action_category):
+        # TODO(luca) expose duration and tool sink to CLI
+        def __create_perform_action(action_category, duration_ms=10000,
+                                    use_tool_sink=False):
             return {
-                'unix_millis_action_duration_estimate': (
-                    self.args.duration_secs * 1000
-                ),
-                # for internal FleetUpdateHandle to check if action
-                # is performable by this fleet
-                'category': action_category,
-                'description': {
-                    # for fleet manager to start action process
-                    'deliver_cart_task_name': action_category
-                },
-                'use_tool_sink': self.args.use_tool_sink,
-            }
+                    'unix_millis_action_duration_estimate': duration_ms,
+                    # for internal FleetUpdateHandle to check if action
+                    # is performable by this fleet
+                    'category': action_category,
+                    'description':
+                    {
+                        # for fleet manager to start action process
+                        'deliver_cart_task_name': action_category
+                    },
+                    'use_tool_sink': use_tool_sink
+                    }
 
         # Define with request category compose
         request['category'] = 'compose'
@@ -177,22 +159,16 @@ class TaskRequester(Node):
 
 
 def main(argv=sys.argv):
-    """Dispatch a cart delivery."""
     rclpy.init(args=sys.argv)
     args_without_ros = rclpy.utilities.remove_ros_args(sys.argv)
 
     task_requester = TaskRequester(args_without_ros)
     rclpy.spin_until_future_complete(
-        task_requester,
-        task_requester.response,
-        timeout_sec=task_requester.args.timeout,
-    )
+        task_requester, task_requester.response, timeout_sec=5.0)
     if task_requester.response.done():
-        print(f'Got response: \n{task_requester.response.result()}')
+        print(f'Got response:\n{task_requester.response.result()}')
     else:
         print('Did not get a response')
-        rclpy.shutdown()
-        sys.exit(1)
     rclpy.shutdown()
 
 

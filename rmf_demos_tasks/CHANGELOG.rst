@@ -2,67 +2,14 @@
 Changelog for package rmf_demos_tasks
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-2.11.0 (2026-11-13)
--------------------
-* fix(rmf_demos_tasks): handle invalid waypoint exit code and shutdown on timeout (`#378 <https://github.com/open-rmf/rmf_demos/issues/378>`_)
-* feat(rmf_demos_tasks): add configurable timeout and non-zero exit codes (`#371 <https://github.com/open-rmf/rmf_demos/issues/371>`_)
-  Fixes `#370 <https://github.com/open-rmf/rmf_demos/issues/370>`_
-  Co-authored-by: Gary Bey <beyhy94@gmail.com>
-* feat(rmf_demos_tasks): expose duration and use_tool_sink in dispatch_cart_delivery (`#375 <https://github.com/open-rmf/rmf_demos/issues/375>`_)
-  Co-authored-by: Aaron Chong <aaronchongth@gmail.com>
-* Add chart_lab map, zone-related task & launch for GoToZone feature (`#350 <https://github.com/open-rmf/rmf_demos/issues/350>`_)
-  Co-authored-by: Brandon Koh <brandonk10.10@gmail.com>
-  Co-authored-by: kjchee <keai_jiang_chee@cgh.com.sg>
-  Co-authored-by: Tey Leong Teck <leong_teck_tey@cgh.com.sg>
-  Co-authored-by: Loke Ji Xian <loke_ji_xian@cgh.com.sg>
-  Co-authored-by: Michael X. Grey <mxgrey@intrinsic.ai>
-* Fix for nav graph vertex search & safeguard against invalid waypoint name in get_robot_location (`#361 <https://github.com/open-rmf/rmf_demos/issues/361>`_)
-* Fix rmf_demos_tasks futures for rclpy spinning (`#365 <https://github.com/open-rmf/rmf_demos/issues/365>`_)
-  Co-authored-by: Aaron Chong <aaronchongth@gmail.com>
-* Fix: rmf_lift_msgs quality declaration link (`#363 <https://github.com/open-rmf/rmf_demos/issues/363>`_)
-* Contributors: Dennis Lanov, Gary Bey, Mosiwon, Muskan Kumari, chart
-
-2.10.0 (2026-09-26)
--------------------
-* rmf_demos_tasks: Fix typo in license name in package.xml (`#358 <https://github.com/open-rmf/rmf_demos/issues/358>`_)
-* Contributors: Silvio Traversaro
-
-2.9.0 (2026-06-17)
+2.4.1 (2026-11-23)
 ------------------
-* Lyrical compatibility (`#353 <https://github.com/open-rmf/rmf_demos/issues/353>`_)
-* Contributors: Grey
-
-2.8.2 (2026-02-23)
-------------------
-
-2.8.1 (2026-01-13)
-------------------
-* Add a --start-at-departure option for dispatch_go_to_place (`#331 <https://github.com/open-rmf/rmf_demos/issues/331>`_)
-* Fix cancel task stuck indefinitely (`#320 <https://github.com/open-rmf/rmf_demos/issues/320>`_)
-* Contributors: Aaron Chong, Grey
-
-2.8.0 (2025-07-21)
-------------------
-
-2.7.0 (2025-06-09)
-------------------
-
-2.6.0 (2025-05-09)
-------------------
-* Dynamic events CLI scripts (`#296 <https://github.com/open-rmf/rmf_demos/issues/296>`_)
+* Fixed (`#320 <https://github.com/open-rmf/rmf_demos/issues/320>`_)
 * Adds a script to cancel the currently executing task on a specific robot. (`#286 <https://github.com/open-rmf/rmf_demos/issues/286>`_)
-* Introduce --estimate option to some task dispatch scripts (`#287 <https://github.com/open-rmf/rmf_demos/issues/287>`_)
-* Emergency signal script (`#288 <https://github.com/open-rmf/rmf_demos/issues/288>`_)
-* created .gitignore in rmf_demos_task for ignoring pycache files. (`#281 <https://github.com/open-rmf/rmf_demos/issues/281>`_)
-* Contributors: Arjo Chakravarty, Francesco Fallica, Grey, Jun
-
-2.5.0 (2024-11-27)
-------------------
-* Add proto-reservation node as core part of RMF (`#212 <https://github.com/open-rmf/rmf_demos/issues/212>`_)
+* created .gitignore in rmf_demos_task for ignoring __pycache_\_ files. (`#281 <https://github.com/open-rmf/rmf_demos/issues/281>`_)
 * Fix existing style issues (`#252 <https://github.com/open-rmf/rmf_demos/issues/252>`_)
-* Add attach cart action (`#225 <https://github.com/open-rmf/rmf_demos/issues/225>`_)
 * Adding requester and request time for dispatch scripts (`#240 <https://github.com/open-rmf/rmf_demos/issues/240>`_)
-* Contributors: Aaron Chong, Arjo Chakravarty, Luca Della Vedova, Xiyu
+* Contributors: Aaron Chong, Arjo Chakravarty, Francesco Fallica, Luca Della Vedova
 
 2.4.0 (2024-06-12)
 ------------------

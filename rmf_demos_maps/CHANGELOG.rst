@@ -2,47 +2,10 @@
 Changelog for package rmf_demos_maps
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-2.11.0 (2026-11-13)
--------------------
-* Add chart_lab map, zone-related task & launch for GoToZone feature (`#350 <https://github.com/open-rmf/rmf_demos/issues/350>`_)
-  Co-authored-by: Brandon Koh <brandonk10.10@gmail.com>
-  Co-authored-by: kjchee <keai_jiang_chee@cgh.com.sg>
-  Co-authored-by: Tey Leong Teck <leong_teck_tey@cgh.com.sg>
-  Co-authored-by: Loke Ji Xian <loke_ji_xian@cgh.com.sg>
-  Co-authored-by: Michael X. Grey <mxgrey@intrinsic.ai>
-* bump cmake version (`#366 <https://github.com/open-rmf/rmf_demos/issues/366>`_)
-* Contributors: Aaron Chong, chart
-
-2.10.0 (2026-09-26)
--------------------
-
-2.9.0 (2026-06-17)
-------------------
-
-2.8.2 (2026-02-23)
-------------------
-
-2.8.1 (2026-01-13)
-------------------
-
-2.8.0 (2025-07-21)
-------------------
-* Use builtin gazebo model downloading (`#307 <https://github.com/open-rmf/rmf_demos/issues/307>`_)
-* Contributors: Luca Della Vedova
-
-2.7.0 (2025-06-09)
-------------------
-
-2.6.0 (2025-05-09)
+2.4.1 (2026-11-23)
 ------------------
 * Change robot types to include a namespace (`#272 <https://github.com/open-rmf/rmf_demos/issues/272>`_)
 * Contributors: Luca Della Vedova
-
-2.5.0 (2024-11-27)
-------------------
-* Add proto-reservation node as core part of RMF (`#212 <https://github.com/open-rmf/rmf_demos/issues/212>`_)
-* Remove nav graph for fleet manager and update Office world (`#263 <https://github.com/open-rmf/rmf_demos/issues/263>`_)
-* Contributors: Arjo Chakravarty, Xiyu
 
 2.4.0 (2024-06-12)
 ------------------

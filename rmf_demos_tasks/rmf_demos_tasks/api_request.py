@@ -13,9 +13,9 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""Send a generic API request."""
 
 import argparse
+import asyncio
 import json
 import sys
 import uuid
@@ -32,10 +32,8 @@ from rmf_task_msgs.msg import ApiRequest, ApiResponse
 
 ###############################################################################
 class ApiRequester(Node):
-    """API requester."""
 
     def __init__(self, argv=sys.argv):
-        """Initialize an API requester."""
         super().__init__('task_requester')
         parser = argparse.ArgumentParser()
         parser.add_argument(
@@ -49,15 +47,9 @@ class ApiRequester(Node):
             type=str,
             help='Specify an ID for this request',
         )
-        parser.add_argument(
-            '--timeout',
-            type=float,
-            default=5.0,
-            help='Timeout in seconds to wait for a response, default: 5.0',
-        )
 
         self.args = parser.parse_args(argv[1:])
-        self.response = rclpy.Future()
+        self.response = asyncio.Future()
 
         with open(self.args.file) as f:
             payload = json.load(f)
@@ -97,22 +89,16 @@ class ApiRequester(Node):
 
 
 def main(argv=sys.argv):
-    """Send a generic API request."""
     rclpy.init(args=sys.argv)
     args_without_ros = rclpy.utilities.remove_ros_args(sys.argv)
 
     task_requester = ApiRequester(args_without_ros)
     rclpy.spin_until_future_complete(
-        task_requester,
-        task_requester.response,
-        timeout_sec=task_requester.args.timeout,
-    )
+        task_requester, task_requester.response, timeout_sec=5.0)
     if task_requester.response.done():
-        print(f'Got response: \n{task_requester.response.result()}')
+        print(f'Got response:\n{task_requester.response.result()}')
     else:
         print('Did not get a response')
-        rclpy.shutdown()
-        sys.exit(1)
     rclpy.shutdown()
 
 

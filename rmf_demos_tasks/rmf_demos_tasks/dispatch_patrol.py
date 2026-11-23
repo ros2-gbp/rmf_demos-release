@@ -13,9 +13,9 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""Dispatch a patrol task."""
 
 import argparse
+import asyncio
 import json
 import sys
 import uuid
@@ -27,7 +27,6 @@ from rclpy.qos import QoSDurabilityPolicy as Durability
 from rclpy.qos import QoSHistoryPolicy as History
 from rclpy.qos import QoSProfile
 from rclpy.qos import QoSReliabilityPolicy as Reliability
-
 from rmf_task_msgs.msg import ApiRequest
 from rmf_task_msgs.msg import ApiResponse
 
@@ -35,10 +34,8 @@ from rmf_task_msgs.msg import ApiResponse
 
 
 class TaskRequester(Node):
-    """Dispatch patrol task requester."""
 
     def __init__(self, argv=sys.argv):
-        """Initialize task requester."""
         super().__init__('task_requester')
         parser = argparse.ArgumentParser()
         parser.add_argument(
@@ -93,15 +90,9 @@ class TaskRequester(Node):
             type=str,
             default='rmf_demos_tasks'
         )
-        parser.add_argument(
-            '--timeout',
-            type=float,
-            default=5.0,
-            help='Timeout in seconds to wait for a response, default: 5.0',
-        )
 
         self.args = parser.parse_args(argv[1:])
-        self.response = rclpy.Future()
+        self.response = asyncio.Future()
 
         transient_qos = QoSProfile(
             history=History.KEEP_LAST,
@@ -174,22 +165,17 @@ class TaskRequester(Node):
 
 
 def main(argv=sys.argv):
-    """Dispatch a patrol task."""
     rclpy.init(args=sys.argv)
     args_without_ros = rclpy.utilities.remove_ros_args(sys.argv)
 
     task_requester = TaskRequester(args_without_ros)
     rclpy.spin_until_future_complete(
-        task_requester,
-        task_requester.response,
-        timeout_sec=task_requester.args.timeout,
+        task_requester, task_requester.response, timeout_sec=5.0
     )
     if task_requester.response.done():
-        print(f'Got response: \n{task_requester.response.result()}')
+        print(f'Got response:\n{task_requester.response.result()}')
     else:
         print('Did not get a response')
-        rclpy.shutdown()
-        sys.exit(1)
     rclpy.shutdown()
 
 

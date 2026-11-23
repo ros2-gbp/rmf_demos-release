@@ -13,9 +13,9 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""Teleop a robot."""
 
 import argparse
+import asyncio
 import sys
 import uuid
 
@@ -25,7 +25,6 @@ from rclpy.qos import QoSDurabilityPolicy as Durability
 from rclpy.qos import QoSHistoryPolicy as History
 from rclpy.qos import QoSProfile
 from rclpy.qos import QoSReliabilityPolicy as Reliability
-
 from rmf_fleet_msgs.msg import Location
 from rmf_fleet_msgs.msg import PathRequest
 
@@ -33,10 +32,8 @@ from rmf_fleet_msgs.msg import PathRequest
 
 
 class Requester(Node):
-    """Teleop requester."""
 
     def __init__(self, argv=sys.argv):
-        """Initialize the requester."""
         super().__init__('teleop_publisher')
         parser = argparse.ArgumentParser()
 
@@ -90,12 +87,11 @@ class Requester(Node):
 
 
 def main(argv=sys.argv):
-    """Teleop a robot."""
     rclpy.init(args=sys.argv)
     args_without_ros = rclpy.utilities.remove_ros_args(sys.argv)
     requester = Requester(args_without_ros)
 
-    timeout = rclpy.Future()
+    timeout = asyncio.Future()
 
     def trigger_timeout():
         timeout.set_result(True)

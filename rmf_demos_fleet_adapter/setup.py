@@ -8,7 +8,7 @@ package_name = 'rmf_demos_fleet_adapter'
 
 setup(
     name=package_name,
-    version='2.11.0',
+    version='2.4.1',
     packages=find_packages(),
     data_files=[
         (
@@ -29,9 +29,7 @@ setup(
     description='Fleet adapters for interfacing with RMF Demos robots with a '
     'fleet manager via REST API',
     license='Apache License 2.0',
-    extras_require={
-        'test': ['pytest'],
-    },
+    tests_require=['pytest'],
     entry_points={
         'console_scripts': [
             'fleet_adapter=rmf_demos_fleet_adapter.fleet_adapter:main',

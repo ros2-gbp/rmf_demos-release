@@ -2,54 +2,8 @@
 Changelog for package rmf_demos
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-2.11.0 (2026-11-13)
--------------------
-* Add chart_lab map, zone-related task & launch for GoToZone feature (`#350 <https://github.com/open-rmf/rmf_demos/issues/350>`_)
-  Co-authored-by: Brandon Koh <brandonk10.10@gmail.com>
-  Co-authored-by: kjchee <keai_jiang_chee@cgh.com.sg>
-  Co-authored-by: Tey Leong Teck <leong_teck_tey@cgh.com.sg>
-  Co-authored-by: Loke Ji Xian <loke_ji_xian@cgh.com.sg>
-  Co-authored-by: Michael X. Grey <mxgrey@intrinsic.ai>
-* bump cmake version (`#366 <https://github.com/open-rmf/rmf_demos/issues/366>`_)
-* Contributors: Aaron Chong, chart
-
-2.10.0 (2026-09-26)
--------------------
-
-2.9.0 (2026-06-17)
+2.4.1 (2026-11-23)
 ------------------
-
-2.8.2 (2026-02-23)
-------------------
-* Add task_assignment_strategy to fleet config (`#332 <https://github.com/open-rmf/rmf_demos/issues/332>`_)
-* Contributors: kj
-
-2.8.1 (2026-01-13)
-------------------
-* Add use_site_map param (`#338 <https://github.com/open-rmf/rmf_demos/issues/338>`_)
-* Contributors: Xiyu
-
-2.8.0 (2025-07-21)
-------------------
-* Add mutex group supervisor to common launch file (`#310 <https://github.com/open-rmf/rmf_demos/issues/310>`_)
-  Co-authored-by: yadunund <yadunund@intrinsic.ai>
-* Contributors: Grey
-
-2.7.0 (2025-06-09)
-------------------
-
-2.6.0 (2025-05-09)
-------------------
-* Dynamic events CLI scripts (`#296 <https://github.com/open-rmf/rmf_demos/issues/296>`_)
-  Co-authored-by: tanjunkiat <tanjunkiat@outlook.sg>
-* Add missing dep for rmf_reservation_node (`#297 <https://github.com/open-rmf/rmf_demos/issues/297>`_)
-* Contributors: Aaron Chong, Grey
-
-2.5.0 (2024-11-27)
-------------------
-* Provide example for robot-specific finishing request (`#255 <https://github.com/open-rmf/rmf_demos/issues/255>`_)
-* Add proto-reservation node as core part of RMF (`#212 <https://github.com/open-rmf/rmf_demos/issues/212>`_)
-* Contributors: Arjo Chakravarty, Xiyu
 
 2.4.0 (2024-06-12)
 ------------------

@@ -2,54 +2,14 @@
 Changelog for package rmf_demos_fleet_adapter
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-2.11.0 (2026-11-13)
--------------------
-* feat(fleet_adapter): support dynamic port allocation via portpicker and cli override (`#369 <https://github.com/open-rmf/rmf_demos/issues/369>`_)
-  * feat(fleet_adapter): support dynamic port allocation via portpicker and cli override
-  Fixes `#226 <https://github.com/open-rmf/rmf_demos/issues/226>`_
-  * refactor(fleet_manager): address review comments on portpicker deprecation and linting
-  * refactor: simplify portpicker usage and restore package dependency
-  ---------
-* Contributors: Muskan Kumari
-
-2.10.0 (2026-09-26)
--------------------
-
-2.9.0 (2026-06-17)
+2.4.1 (2026-11-23)
 ------------------
-* Lyrical compatibility (`#353 <https://github.com/open-rmf/rmf_demos/issues/353>`_)
-* Contributors: Grey
-
-2.8.2 (2026-02-23)
-------------------
-
-2.8.1 (2026-01-13)
-------------------
-
-2.8.0 (2025-07-21)
-------------------
-* Generate new cmd_id for stop request (`#294 <https://github.com/open-rmf/rmf_demos/pull/294>`_)
-* Contributors: Cheng-Wei Chen
-
-2.7.0 (2025-06-09)
-------------------
-
-2.6.0 (2025-05-09)
-------------------
-* Provide example of using reset planner cache setting (`#300 <https://github.com/open-rmf/rmf_demos/issues/300>`_)
 * Set self.teleoperation to None when finish_action (`#289 <https://github.com/open-rmf/rmf_demos/issues/289>`_)
 * Add Speed Limit Requests (`#152 <https://github.com/open-rmf/rmf_demos/issues/152>`_)
 * only remove if lane_idx exist in closed_lanes (`#276 <https://github.com/open-rmf/rmf_demos/issues/276>`_)
-* Contributors: Cheng-Wei Chen, Grey, Pranay Shirodkar, Xiyu
-
-2.5.0 (2024-11-27)
-------------------
-* Add proto-reservation node as core part of RMF (`#212 <https://github.com/open-rmf/rmf_demos/issues/212>`_)
-* Remove nav graph for fleet manager and update Office world (`#263 <https://github.com/open-rmf/rmf_demos/issues/263>`_)
 * Fix existing style issues (`#252 <https://github.com/open-rmf/rmf_demos/issues/252>`_)
-* Fixes undefined variable in `FleetManager` (`#251 <https://github.com/open-rmf/rmf_demos/issues/251>`_)
-* Add attach cart action (`#225 <https://github.com/open-rmf/rmf_demos/issues/225>`_)
-* Contributors: Arjo Chakravarty, Luca Della Vedova, Xiyu
+* Addresses `#250 <https://github.com/open-rmf/rmf_demos/issues/250>`_: Fixes undefined variable in `FleetManager` (`#251 <https://github.com/open-rmf/rmf_demos/issues/251>`_)
+* Contributors: Arjo Chakravarty, Cheng-Wei Chen, Luca Della Vedova, Pranay Shirodkar
 
 2.4.0 (2024-06-12)
 ------------------

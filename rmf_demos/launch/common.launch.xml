@@ -10,11 +10,6 @@
   <arg name="bidding_time_window" description="Time window in seconds for task bidding process" default="2.0"/>
   <arg name="use_unique_hex_string_with_task_id" default="true" description="Appends a unique hex string to the task ID"/>
   <arg name="server_uri" default="" description="The URI of the api server to transmit state and task information."/>
-  <arg name="use_reservation_node" default="false" description="Enable the reservation node for parking spot de-confliction"/>
-  <arg name="use_site_map" default="false" description="Generate and serve site maps if True. Otherwise supports only building maps."/>
-  <arg name="zone_entry_request_timeout" default="30" description="Seconds a zone request waits for reservations before it is refused"/>
-  <arg name="zone_reservation_settle_time_ms" default="1000" description="Milliseconds to wait for a zone's reservations before choosing"/>
-  <arg name="zone_pool_idle_timeout" default="30" description="Seconds a zone sits unwanted before its reservations are handed back"/>
 
   <!-- Traffic Schedule  -->
   <node pkg="rmf_traffic_ros2" exec="rmf_traffic_schedule" output="both" name="rmf_traffic_schedule_primary">
@@ -26,19 +21,11 @@
     <param name="use_sim_time" value="$(var use_sim_time)"/>
   </node>
 
+  <!-- Building Map  -->
   <group>
-    <!-- Site Map Server -->
-    <group if="$(var use_site_map)">
-      <node pkg="rmf_site_map_server" exec="site_map_server" args="$(var config_file)">
-      </node>
-    </group>
-
-    <!-- Building Map -->
-    <group unless="$(var use_site_map)">
-      <node pkg="rmf_building_map_tools" exec="building_map_server" args="$(var config_file)">
-        <param name="use_sim_time" value="$(var use_sim_time)"/>
-      </node>
-    </group>
+    <node pkg="rmf_building_map_tools" exec="building_map_server" args="$(var config_file)">
+      <param name="use_sim_time" value="$(var use_sim_time)"/>
+    </node>
   </group>
 
   <!-- Visualizer -->
@@ -74,25 +61,4 @@
       <param name="server_uri" value="$(var server_uri)"/>
     </node>
   </group>
-
-  <!-- Proto-Reservation system-->
-  <group  if="$(var use_reservation_node)">
-    <node pkg="rmf_reservation_node" exec="queue_manager"/>
-  </group>
-
-  <!-- Mutex Group Supervisor, manages the locking and unlocking of mutex groups -->
-  <group>
-    <node pkg="rmf_fleet_adapter" exec="mutex_group_supervisor"/>
-  </group>
-
-  <!-- Zone Manager, manages zone bookings for robots -->
-  <group>
-    <node pkg="rmf_fleet_adapter" exec="zone_manager">
-      <param name="use_sim_time" value="$(var use_sim_time)"/>
-      <param name="entry_request_timeout" value="$(var zone_entry_request_timeout)"/>
-      <param name="reservation_settle_time_ms" value="$(var zone_reservation_settle_time_ms)"/>
-      <param name="zone_pool_idle_timeout" value="$(var zone_pool_idle_timeout)"/>
-    </node>
-  </group>
-
 </launch>

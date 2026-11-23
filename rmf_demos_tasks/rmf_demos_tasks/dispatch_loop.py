@@ -13,14 +13,12 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""Dispatch a loop task."""
 
 import argparse
 import sys
 
 import rclpy
 from rclpy.parameter import Parameter
-
 from rmf_task_msgs.msg import Loop
 from rmf_task_msgs.msg import TaskType
 from rmf_task_msgs.srv import SubmitTask
@@ -29,10 +27,8 @@ from rmf_task_msgs.srv import SubmitTask
 
 
 class TaskRequester:
-    """Task requester."""
 
     def __init__(self, argv=sys.argv):
-        """Initialize a task requester."""
         parser = argparse.ArgumentParser()
         parser.add_argument(
             '-s', '--start', required=True, type=str, help='Start waypoint'
@@ -66,12 +62,6 @@ class TaskRequester:
             action='store_true',
             help='Use sim time, default: false',
         )
-        parser.add_argument(
-            '--timeout',
-            type=float,
-            default=5.0,
-            help='Timeout in seconds to wait for a response, default: 5.0',
-        )
 
         self.args = parser.parse_args(argv[1:])
         self.node = rclpy.create_node('task_requester')
@@ -90,7 +80,6 @@ class TaskRequester:
             self.node.set_parameters([param])
 
     def generate_task_req_msg(self):
-        """Generate a task request message."""
         req_msg = SubmitTask.Request()
         req_msg.description.task_type.type = TaskType.TYPE_LOOP
 
@@ -108,12 +97,9 @@ class TaskRequester:
         return req_msg
 
     def main(self):
-        """Dispatch a loop task."""
-        if not self.submit_task_srv.wait_for_service(
-            timeout_sec=self.args.timeout
-        ):
+        if not self.submit_task_srv.wait_for_service(timeout_sec=3.0):
             self.node.get_logger().error('Dispatcher Node is not available')
-            return 1
+            return
 
         rclpy.spin_once(self.node, timeout_sec=1.0)
         req_msg = self.generate_task_req_msg()
@@ -123,41 +109,34 @@ class TaskRequester:
         try:
             future = self.submit_task_srv.call_async(req_msg)
             rclpy.spin_until_future_complete(
-                self.node, future, timeout_sec=self.args.timeout
+                self.node, future, timeout_sec=1.0
             )
             response = future.result()
             if response is None:
                 self.node.get_logger().error('/submit_task srv call failed')
-                return 1
             elif not response.success:
                 self.node.get_logger().error(
                     'Dispatcher node failed to accept task'
                 )
-                return 1
             else:
                 self.node.get_logger().info(
                     'Request was successfully submitted '
                     f'and assigned task_id: [{response.task_id}]'
                 )
-                return 0
         except Exception as e:
             self.node.get_logger().error('Error! Submit Srv failed %r' % (e,))
-            return 1
 
 
 ###############################################################################
 
 
 def main(argv=sys.argv):
-    """Dispatch a loop task."""
     rclpy.init(args=sys.argv)
     args_without_ros = rclpy.utilities.remove_ros_args(sys.argv)
 
     task_requester = TaskRequester(args_without_ros)
-    rc = task_requester.main()
+    task_requester.main()
     rclpy.shutdown()
-    if rc != 0:
-        sys.exit(rc)
 
 
 if __name__ == '__main__':

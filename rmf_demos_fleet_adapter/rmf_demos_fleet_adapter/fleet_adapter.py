@@ -14,7 +14,6 @@
 
 import argparse
 import asyncio
-import faulthandler
 import math
 import sys
 import threading
@@ -48,7 +47,6 @@ from .RobotClientAPI import RobotUpdateData
 # Main
 # ------------------------------------------------------------------------------
 def main(argv=sys.argv):
-    faulthandler.enable()
     # Init rclpy and adapter
     rclpy.init(args=argv)
     rmf_adapter.init_rclcpp()
@@ -120,7 +118,6 @@ def main(argv=sys.argv):
 
     fleet_config.server_uri = server_uri
     fleet_handle = adapter.add_easy_fleet(fleet_config)
-    fleet_handle.more().set_planner_cache_reset_size(2500)
 
     # Initialize robot API for this fleet
     fleet_mgr_yaml = config_yaml['fleet_manager']
@@ -260,12 +257,8 @@ class RobotAdapter:
         if self.execution is not None:
             if self.execution.identifier.is_same(activity):
                 self.execution = None
-                running_cmd_id = self.cmd_id
-                self.cmd_id += 1
-                stop_cmd_id = self.cmd_id
                 self.attempt_cmd_until_success(
-                    cmd=self.api.stop,
-                    args=(self.name, running_cmd_id, stop_cmd_id)
+                    cmd=self.api.stop, args=(self.name, self.cmd_id)
                 )
 
     def execute_action(self, category: str, description: dict, execution):
@@ -281,16 +274,6 @@ class RobotAdapter:
             case 'clean':
                 self.attempt_cmd_until_success(
                     cmd=self.perform_clean, args=(description['zone'],)
-                )
-            case 'delivery_pickup':
-                self.attempt_cmd_until_success(
-                    cmd=self.api.toggle_attach, args=(
-                        self.name, True, self.cmd_id)
-                )
-            case 'delivery_dropoff':
-                self.attempt_cmd_until_success(
-                    cmd=self.api.toggle_attach, args=(
-                        self.name, False, self.cmd_id)
                 )
 
     def finish_action(self):
@@ -308,7 +291,7 @@ class RobotAdapter:
 
     def perform_docking(self, destination):
         match self.api.start_activity(
-            self.name, self.cmd_id, 'dock', destination.dock
+            self.name, self.cmd_id, 'dock', destination.dock()
         ):
             case (RobotAPIResult.SUCCESS, path):
                 self.override = self.execution.override_schedule(

@@ -2,57 +2,12 @@
 Changelog for package rmf_demos_gz
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-2.11.0 (2026-11-13)
--------------------
-* Add chart_lab map, zone-related task & launch for GoToZone feature (`#350 <https://github.com/open-rmf/rmf_demos/issues/350>`_)
-  Co-authored-by: Brandon Koh <brandonk10.10@gmail.com>
-  Co-authored-by: kjchee <keai_jiang_chee@cgh.com.sg>
-  Co-authored-by: Tey Leong Teck <leong_teck_tey@cgh.com.sg>
-  Co-authored-by: Loke Ji Xian <loke_ji_xian@cgh.com.sg>
-  Co-authored-by: Michael X. Grey <mxgrey@intrinsic.ai>
-* bump cmake version (`#366 <https://github.com/open-rmf/rmf_demos/issues/366>`_)
-* Contributors: Aaron Chong, chart
-
-2.10.0 (2026-09-26)
--------------------
-
-2.9.0 (2026-06-17)
+2.4.1 (2026-11-23)
 ------------------
-
-2.8.2 (2026-02-23)
-------------------
-
-2.8.1 (2026-01-13)
-------------------
-* Switch to using ros_gz_sim to run Gazebo (`#344 <https://github.com/open-rmf/rmf_demos/issues/344>`_)
-* Contributors: Luca Della Vedova
-
-2.8.0 (2025-07-21)
-------------------
-* Use builtin gazebo model downloading (`#307 <https://github.com/open-rmf/rmf_demos/issues/307>`_)
-* Contributors: Luca Della Vedova
-
-2.7.0 (2025-06-09)
-------------------
-* Remove gazebo_version argument (`#305 <https://github.com/open-rmf/rmf_demos/issues/305>`_)
-  * Version independent default gazebo
-  * Remove gazebo version altogether
-  * Remove gazebo_version from README
-  ---------
-* Contributors: Luca Della Vedova
-
-2.6.0 (2025-05-09)
-------------------
-* Use 9 as default gazebo_version (`#292 <https://github.com/open-rmf/rmf_demos/issues/292>`_)
-* Remove redundant launch file (`#271 <https://github.com/open-rmf/rmf_demos/issues/271>`_)
-* Contributors: Arjo Chakravarty, Grey
-
-2.5.0 (2024-11-27)
-------------------
-* Add proto-reservation node as core part of RMF (`#212 <https://github.com/open-rmf/rmf_demos/issues/212>`_)
+* Use environment hooks for plugins / assets (`#262 <https://github.com/open-rmf/rmf_demos/issues/262>`_) (`#304 <https://github.com/open-rmf/rmf_demos/issues/304>`_)
 * Adds the ability to set the update rate of the simulation (`#264 <https://github.com/open-rmf/rmf_demos/issues/264>`_)
-* Use environment hooks for plugins / assets (`#262 <https://github.com/open-rmf/rmf_demos/issues/262>`_)
-* Contributors: Arjo Chakravarty, Luca Della Vedova
+  * Adds the ability to set the update rate of the simulation
+* Contributors: Arjo Chakravarty, Xiyu
 
 2.4.0 (2024-06-12)
 ------------------
